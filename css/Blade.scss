@@ -5,31 +5,18 @@ $blade-actions-background-color: $color2;
 $blade-actions-button-width: 65px;
 $blade-background-color: $color4;
 $blade-border-right-color: $color1;
-$blade-breadcrumbs-height: 40px;
-$blade-container-wrapper-background-color: white;
 $blade-content-z-index: 1;
 $blade-header-background-color: $color1;
 $blade-header-color: white;
 $blade-header-height: 40px;
 $blade-header-z-index: 1;
-$blade-overlay-backdrop-opacity: 0.5;
 
 .blade {
 
-  header {
+  .blade-header {
     position: relative;
     color: $blade-header-color;
     z-index: $blade-header-z-index;
-
-    .back-button {
-      padding: 0 0 0 10px;
-      color: $blade-header-color;
-      display: block;
-      cursor: pointer;
-      line-height: $blade-header-height;
-      background-color: $blade-header-background-color;
-      float: left;
-    }
 
     h1 {
       padding: 0 10px;
@@ -44,8 +31,10 @@ $blade-overlay-backdrop-opacity: 0.5;
       overflow: hidden;
       white-space: nowrap;
     }
+  }
 
-    ul.blade-actions {
+  .blade-actions {
+    ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -57,7 +46,7 @@ $blade-overlay-backdrop-opacity: 0.5;
       li {
         float: left;
 
-        a.button {
+        .button {
           display: block;
           background-color: $blade-actions-background-color;
           color: $blade-header-color;
@@ -100,7 +89,7 @@ $blade-overlay-backdrop-opacity: 0.5;
   }
 
   .blade-content {
-    padding: 10px 10px 0;
+    padding: 0;
     overflow-y: auto;
     overflow-x: hidden;
     position: absolute;

@@ -27,23 +27,19 @@ const ItemOverview = ({ blades }) => {
     content: <p>Presenting overlay</p>,
   }]
 
+  const items = [];
+  for(let i = 1; i <= 10; i++) {
+    items.push(<li className="item" key={i}>{`Item ${i}`}</li>);
+  }
+
   return (
     <Blade
       title="Items"
       actions={actions}
       customOverlays={overlays}
     >
-      <ul>
-        <li>Item1
-        </li>
-        <li>Item2
-        </li>
-        <li>Item3
-        </li>
-        <li>Item4
-        </li>
-        <li>Item5
-        </li>
+      <ul className="items-list">
+        {items}
       </ul>
     </Blade>
   );
