@@ -1,0 +1,113 @@
+$font-size: 14px;
+
+$blade-actions-height: 50px;
+$blade-actions-background-color: $color2;
+$blade-actions-button-width: 65px;
+$blade-background-color: $color4;
+$blade-border-right-color: $color1;
+$blade-breadcrumbs-height: 40px;
+$blade-container-wrapper-background-color: white;
+$blade-content-z-index: 1;
+$blade-header-background-color: $color1;
+$blade-header-color: white;
+$blade-header-height: 40px;
+$blade-header-z-index: 1;
+$blade-overlay-backdrop-opacity: 0.5;
+
+.blade {
+
+  header {
+    position: relative;
+    color: $blade-header-color;
+    z-index: $blade-header-z-index;
+
+    .back-button {
+      padding: 0 0 0 10px;
+      color: $blade-header-color;
+      display: block;
+      cursor: pointer;
+      line-height: $blade-header-height;
+      background-color: $blade-header-background-color;
+      float: left;
+    }
+
+    h1 {
+      padding: 0 10px;
+      margin: 0;
+      vertical-align: middle;
+      color: $blade-header-color;
+      background-color: $blade-header-background-color;
+      height: $blade-header-height;
+      line-height: $blade-header-height;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    ul.blade-actions {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: none;
+      word-wrap: break-word;
+      background-color: $blade-actions-background-color;
+      height: $blade-actions-height;
+
+      li {
+        float: left;
+
+        a.button {
+          display: block;
+          background-color: $blade-actions-background-color;
+          color: $blade-header-color;
+          font-size: 11px;
+          text-align: center;
+          text-decoration: none;
+          padding: 0;
+          margin: 0;
+          line-height: 12px;
+          height: $blade-actions-height;
+          width: $blade-actions-button-width;
+
+          [class*="fa-"] {
+            font-size: 16px;
+            padding-bottom: 1px;
+            margin-top: 2px;
+          }
+
+          &:hover {
+            background-color: lighten($blade-actions-background-color, 5%);
+          }
+
+          &:active, &.active {
+            background-color: lighten($blade-actions-background-color, 10%);
+          }
+
+          &.disabled {
+            background-color: $blade-actions-background-color;
+            color: #aaaaaa;
+          }
+
+          &.toggled {
+            -webkit-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75);
+            box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75);
+          }
+        }
+      }
+    }
+  }
+
+  .blade-content {
+    padding: 10px 10px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    left: 0;
+    top: $blade-header-height + $blade-actions-height;
+    right: 0;
+    bottom: 0;
+    z-index: $blade-content-z-index;
+  }
+}

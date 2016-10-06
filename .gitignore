@@ -1,0 +1,13 @@
+# Logs
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# build folder
+lib
+
+# typescript definitions
+typings/
+
+.DS_STORE

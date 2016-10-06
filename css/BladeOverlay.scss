@@ -1,0 +1,48 @@
+.blade-overlay-container {
+  position: absolute;
+  // a backdrop can be rendered in this container as well and it must be able to cover custom actions
+  z-index: $blade-header-z-index + 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+
+  &.has-content {
+    display: block;
+  }
+
+  .blade-overlay {
+    position: relative;
+    // must be in front of backdrop
+    z-index: $blade-header-z-index + 3;
+    background-color: $blade-background-color;
+    border-bottom: 1px solid $blade-actions-background-color;
+    height: 100px;
+    padding: 10px;
+
+    button,
+    .button {
+      margin: 10px 5px 0 0;
+    }
+  }
+}
+
+.blade-overlay-loading {
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+  width: 100%;
+  text-align: center;
+  // must be in front of backdrop
+  z-index: $blade-header-z-index + 3;
+}
+
+.blade-overlay-backdrop {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $blade-background-color;
+  opacity: $blade-overlay-backdrop-opacity;
+  // must be in front of container but behind other overlays
+  z-index: $blade-header-z-index + 2;
+}

@@ -1,0 +1,13 @@
+.blade-presenter {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0; // prevent spaces between blades
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+  * {
+    box-sizing: border-box;
+  }
+}
