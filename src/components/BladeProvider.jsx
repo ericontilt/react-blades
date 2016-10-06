@@ -18,7 +18,7 @@ export default class BladeProvider extends React.Component {
   }
 
   componentWillMount() {
-    this.unsubscribeListener = this.props.blades.addListener(() => {
+    this.unsubscribeListener = this.props.blades.addListener('render', () => {
       this.forceUpdate();
     });
   }

@@ -1,11 +1,11 @@
 import EventEmitter from '../utils/EventEmitter';
 
 const blades = {};
-const event = new EventEmitter();
+const eventEmitter = new EventEmitter();
 
 export default class {
-  addListener(fn) {
-    return event.addListener(fn);
+  addListener(event, fn) {
+    return eventEmitter.addListener(event, fn);
   }
 
   addBlade(blade) {
@@ -13,13 +13,13 @@ export default class {
       return;
     }
     blades[blade.id] = blade;
-    event.trigger();
+    eventEmitter.trigger('render');
   }
 
   removeBlade(id) {
     blades[id] = null;
     delete blades[id];
-    event.trigger();
+    eventEmitter.trigger('render');
   }
 
   getAll() {

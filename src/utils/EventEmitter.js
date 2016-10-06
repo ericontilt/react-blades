@@ -1,17 +1,21 @@
 export default class EventEmitter {
   constructor() {
-    this.listeners = [];
+    this.listeners = {};
   }
 
-  addListener(fn) {
-    this.listeners.push(fn);
+  addListener(event, fn) {
+    if (!this.listeners[event]) {
+      this.listeners[event] = [];
+    }
+    this.listeners[event].push(fn);
     return () => {
-      this.listeners = this.listeners.filter((l) => l !== fn);
+      this.listeners = this.listeners[event].filter((l) => l !== fn);
     };
   }
 
-  trigger(...args) {
-    this.listeners.forEach((fn) => {
+  trigger(event, ...args) {
+    if (!this.listeners[event]) return;
+    this.listeners[event].forEach((fn) => {
       fn(...args);
     });
   }

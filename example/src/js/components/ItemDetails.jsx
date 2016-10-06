@@ -15,7 +15,7 @@ export default class ItemDetails extends React.Component {
       title: 'Back',
       iconClass: 'fa fa-arrow-left',
       callback: () => {
-        this.props.blades.removeBlade(id);
+        this.props.blades.removeBlade(this.props.id);
       },
     }, {
       key: 'save',
