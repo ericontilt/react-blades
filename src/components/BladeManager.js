@@ -4,11 +4,11 @@ const blades = {};
 const eventEmitter = new EventEmitter();
 
 export default class {
-  addListener(event, fn) {
+  on(event, fn) {
     return eventEmitter.addListener(event, fn);
   }
 
-  addBlade(blade) {
+  add(blade) {
     if (!blade || blades[blade.id]) {
       return;
     }
@@ -16,7 +16,7 @@ export default class {
     eventEmitter.trigger('render');
   }
 
-  removeBlade(id) {
+  remove(id) {
     blades[id] = null;
     delete blades[id];
     eventEmitter.trigger('render');

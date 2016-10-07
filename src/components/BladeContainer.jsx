@@ -6,7 +6,10 @@ const propTypes = {
   blades: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  component: PropTypes.func.isRequired,   // TODO: Define shape of component
+  component: PropTypes.shape({
+    type: PropTypes.func.isRequired,
+    props: PropTypes.object,
+  }).isRequired,
   width: PropTypes.number,
   isActive: PropTypes.bool,
   left: PropTypes.number.isRequired,
@@ -48,10 +51,12 @@ export default class BladeContainer extends React.Component {
       active: this.props.isActive,
     };
 
-    const child = React.createElement(this.props.component, {
-      blades: this.props.blades,
-      id: this.props.id,
-    });
+    const child = React.createElement(
+      this.props.component.type,
+      Object.assign({}, {
+        blades: this.props.blades,
+        id: this.props.id,
+      }, this.props.component.props));
 
     return (
       <section ref={(c) => { this.blade = c; }} className={cx(bladeClasses)} style={bladeStyle}>

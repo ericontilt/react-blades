@@ -1,20 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 import { BladeManager, BladeProvider, BladePresenter } from 'react-blades';
+import '../css/main.css';
 import 'react-blades/lib/css/_blades.css';
+import configureStore from './store/configureStore';
+import { loadCourses } from './actions/courseActions.js';
+import CourseList from './components/CourseList';
 
-import ItemOverview from './components/ItemOverview';
+const store = configureStore();
+store.dispatch(loadCourses());
 
 const bladeManager = new BladeManager();
 
-bladeManager.addBlade({
+bladeManager.add({
   id: 'item-overview',
   visibility: 'visible',
-  component: ItemOverview,
+  component: {
+    type: CourseList,
+  },
 });
 
 ReactDOM.render(
-  <BladeProvider blades={bladeManager}>
-    <BladePresenter />
-  </BladeProvider>,
+  <ReduxProvider store={store}>
+    <BladeProvider blades={bladeManager}>
+      <BladePresenter />
+    </BladeProvider>
+  </ReduxProvider>,
   document.getElementById('app'));
