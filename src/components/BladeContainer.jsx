@@ -30,6 +30,7 @@ export default class BladeContainer extends React.Component {
     this.bladeClickListener = attachClickHandler(this.blade,
       (e) => this.props.onActivate(this.props.id, e)
     );
+    window.scrollTo(this.props.left, 0);
   }
 
   componentWillUnmount() {
