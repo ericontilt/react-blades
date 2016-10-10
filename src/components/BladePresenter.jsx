@@ -1,16 +1,8 @@
 import React, { PropTypes } from 'react';
 import BladeContainer from './BladeContainer';
 
-const propTypes = {
-  blades: PropTypes.object.isRequired,
-};
-
-const defaultProps = {
-  blades: {},
-};
-
 const contextTypes = {
-  blades: PropTypes.any,
+  blades: PropTypes.object.isRequired,
 };
 
 export default class BladePresenter extends React.Component {
@@ -36,7 +28,7 @@ export default class BladePresenter extends React.Component {
         left += bladeWidth;
       }
       return bladeComp;
-    }, this);
+    });
 
     return (
       <div className="blade-presenter">
@@ -46,6 +38,4 @@ export default class BladePresenter extends React.Component {
   }
 }
 
-BladePresenter.propTypes = propTypes;
-BladePresenter.defaultProps = defaultProps;
 BladePresenter.contextTypes = contextTypes;
