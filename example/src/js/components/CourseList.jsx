@@ -22,7 +22,7 @@ class CourseList extends React.Component {
         actions.initNewCourse();
         blades.add({
           id: 'course-details',
-          visibility: 'visible',
+          isVisible: true,
           width: 500,
           component: {
             type: CreateCourse,

@@ -23,9 +23,6 @@ export default class BladeProvider extends React.Component {
     });
   }
 
-  componentDidMount() {
-  }
-
   componentWillUnmount() {
     this.unsubscribeListener();
   }

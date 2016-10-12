@@ -10,17 +10,10 @@ const propTypes = {
     type: PropTypes.func.isRequired,
     props: PropTypes.object,
   }).isRequired,
-  width: PropTypes.number,
+  width: PropTypes.number.isRequired,
   isActive: PropTypes.bool,
   left: PropTypes.number.isRequired,
-  hidden: PropTypes.bool,
-  onActivate: PropTypes.func,
-};
-
-const defaultProps = {
-  hidden: false,
-  width: 300,
-  onActivate() {},
+  isVisible: PropTypes.bool.isRequired,
 };
 
 const defaultZIndex = 1;
@@ -28,8 +21,9 @@ const defaultZIndex = 1;
 export default class BladeContainer extends React.Component {
   componentDidMount() {
     this.bladeClickListener = attachClickHandler(this.blade,
-      (e) => this.props.onActivate(this.props.id, e)
+      () => this.props.blades.activate(this.props.id)
     );
+    this.props.blades.activate(this.props.id);
     window.scrollTo(this.props.left, 0);
   }
 
@@ -43,7 +37,7 @@ export default class BladeContainer extends React.Component {
       zIndex: defaultZIndex + this.props.index,
       width: this.props.width,
     };
-    if (this.props.hidden) {
+    if (!this.props.isVisible) {
       bladeStyle.display = 'none';
     }
 
@@ -68,4 +62,3 @@ export default class BladeContainer extends React.Component {
 }
 
 BladeContainer.propTypes = propTypes;
-BladeContainer.defaultProps = defaultProps;

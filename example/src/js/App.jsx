@@ -15,7 +15,7 @@ const bladeManager = new BladeManager();
 
 bladeManager.add({
   id: 'item-overview',
-  visibility: 'visible',
+  isVisible: true,
   component: {
     type: CourseList,
   },
