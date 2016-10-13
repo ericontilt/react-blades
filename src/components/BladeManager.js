@@ -2,8 +2,9 @@ import EventEmitter from '../utils/EventEmitter';
 
 const defaultBladeProps = {
   isVisible: true,
-  width: 300,
   isActive: true,
+  width: 300,
+  depth: 0,
 };
 
 const blades = {};
@@ -13,9 +14,19 @@ const getAllBlades = () =>
   Object.keys(blades)
     .map(id => blades[id]);
 
-const getVisibleBlades = () =>
-  getAllBlades()
-    .filter(blade => blade.isVisible);
+const getVisibleBlades = () => {
+  const explicitVisible = getAllBlades().filter(blade => blade.isVisible);
+  let i = -1;
+  for (i = explicitVisible.length - 1; i >= 0; i--) {
+    if (explicitVisible[i].depth > 0) {
+      break;
+    }
+  }
+  if (i > -1) {
+    return explicitVisible.slice(i, explicitVisible.length);
+  }
+  return explicitVisible;
+};
 
 const recalculateDimensions = () => {
   const visibleBlades = getVisibleBlades();
@@ -32,8 +43,11 @@ export default class {
   }
 
   add(blade) {
-    if (!blade || blades[blade.id]) {
+    if (!blade) {
       return;
+    }
+    if (!blade.id) {
+      throw new Error('A blade id is mandatory.');
     }
     blades[blade.id] = Object.assign({}, defaultBladeProps, blade);
     recalculateDimensions();
@@ -53,8 +67,8 @@ export default class {
     eventEmitter.trigger('render');
   }
 
-  getAll() {
+  getVisible() {
     // TODO: Return an immutable structure here
-    return getAllBlades();
+    return getVisibleBlades();
   }
 }

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Blade } from 'react-blades';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../actions/courseActions';
+import AboutAuthor from './AboutAuthor';
 
 const propTypes = {
-  blades: React.PropTypes.object.isRequired
+  blades: PropTypes.object.isRequired,
+  course: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
-class CreateCourse extends React.Component {
+class EditCourse extends React.Component {
   constructor(props) {
     super(props);
 
@@ -47,11 +50,24 @@ class CreateCourse extends React.Component {
       callback: () => {
         actions.saveCourse(course);
       },
+    }, {
+      key: 'about-author',
+      title: 'About Author',
+      iconClass: 'fa fa-info',
+      callback: () => {
+        blades.add({
+          id: 'about-course-author',
+          depth: 1,
+          component: {
+            type: AboutAuthor
+          }
+        })
+      },
     }];
 
     return (
       <Blade
-        title="New Course"
+        title="Edit Course"
         actions={bladeActions}
       >
         <div>
@@ -88,7 +104,7 @@ class CreateCourse extends React.Component {
   }
 };
 
-CreateCourse.propTypes = propTypes;
+EditCourse.propTypes = propTypes;
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -102,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateCourse);
+export default connect(mapStateToProps, mapDispatchToProps)(EditCourse);

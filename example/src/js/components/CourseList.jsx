@@ -2,13 +2,31 @@ import React from 'react';
 import { Blade } from 'react-blades';
 import CourseListItem from './CourseListItem';
 import CreateCourse from './CreateCourse';
+import EditCourse from './EditCourse';
 import * as courseActions from '../actions/courseActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 class CourseList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCourseClick = this.handleCourseClick.bind(this);
+  }
+
+  handleCourseClick(course) {
+    const { blades, actions } = this.props;
+    actions.editCourse(course);
+    blades.add({
+      id: 'edit-course',
+      width: 500,
+      component: {
+        type: EditCourse,
+      },
+    });
+  }
+
   courseRow(course, index) {
-    return <CourseListItem course={course} key={course.id} />;
+    return <CourseListItem course={course} key={course.id} onCourseClick={this.handleCourseClick} />;
   }
 
   render() {
@@ -29,11 +47,6 @@ class CourseList extends React.Component {
           },
         })
       },
-    }, {
-      key: 'refresh-courses',
-      title: 'Refresh',
-      iconClass: 'fa fa-refresh',
-      callback: () => {},
     }]
 
     return (
@@ -42,7 +55,7 @@ class CourseList extends React.Component {
         actions={bladeActions}
       >
         <ul className="course-list">
-          {courses.map(this.courseRow)}
+          {courses.map(c => this.courseRow(c))}
         </ul>
       </Blade>
     );
