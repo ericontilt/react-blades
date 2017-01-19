@@ -24,16 +24,9 @@ const BladeActionButton = ({
   badge,
   getTooltip,
 }) => {
-  const buttonClasses = {
-    button: true,
-    toggled: isToggled,
-  };
-
-  if (isEnabled) {
-    buttonClasses.enabled = true;
-  } else {
-    buttonClasses.disabled = true;
-  }
+  const modifiersForButton = [];
+  if (isToggled) modifiersForButton.push('toggled');
+  if (!isEnabled) modifiersForButton.push('disabled');
 
   let clickHandler = () => {};
   if (isEnabled) {
@@ -49,16 +42,18 @@ const BladeActionButton = ({
 
   return (
     <li className="BladeActionButton">
-      <a
-        className={cx(buttonClasses)}
+      <button
+        className={cx({
+          BladeActionButton__button: true,
+        }, modifiersForButton.map(mod => `BladeActionButton__button--${mod}`))}
         onClick={clickHandler}
         title={tooltip}
       >
-        <div className={iconClass}>
+        <i className={iconClass}>
           {badge !== undefined ? <span className="badge">{badge}</span> : null}
-        </div>
-        <div className="title">{title}</div>
-      </a>
+        </i>
+        <div className="BladeActionButton_title">{title}</div>
+      </button>
     </li>
   );
 };

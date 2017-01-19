@@ -46,23 +46,23 @@ const getScrollStyle = (scroll) => {
 
 export default class Blade extends React.Component {
   renderActions() {
-    return this.props.actions.map(action => <BladeActionButton key={action.id} action={action} />);
+    return this.props.actions.map(action => <BladeActionButton key={action.id} {...action} />);
   }
 
   render() {
     const bladeStyle = Object.assign({}, getScrollStyle(this.props.scroll));
 
     return (
-      <div className="blade" style={{ position: 'relative', width: '100%', height: '100%' }}>
-        <header className="blade-header">
+      <div className="Blade" style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <header className="Blade__header">
           <h1>{this.props.title}</h1>
         </header>
-        <div className="blade-actions">
+        <div className="Blade__actions">
           <ul>
             {this.renderActions()}
           </ul>
         </div>
-        <div className="blade-content" style={bladeStyle}>
+        <div className="Blade__content" style={bladeStyle}>
           {this.props.children}
         </div>
       </div>

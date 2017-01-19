@@ -6,7 +6,7 @@ const contextTypes = {
 };
 
 const BladePresenter = (_, { blades }) => (
-  <div className="blade-presenter">
+  <div className="Blade__presenter">
     {blades.getVisible().map((blade, i) => (
       <BladeContainer
         blades={blades}

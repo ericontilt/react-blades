@@ -7,6 +7,7 @@
     "build": "npm run clean && npm run build:js && npm run build:css && npm run build:svg",
     "build:css": "node-sass css/styles.scss lib/css/_blades.css",
     "build:js": "babel src/ -d lib/ --ignore src/components",
+    "build:svg": "webpack",
     "clean": "rimraf lib",
     "lint": "eslint --ext .js,.jsx src",
     "mocha": "mocha --compilers js:babel-register,jsx:babel-register --require airbnb-js-shims --recursive ./test/_helpers",

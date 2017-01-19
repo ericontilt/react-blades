@@ -45,7 +45,7 @@ export default class BladeContainer extends React.Component {
     }
 
     const bladeClasses = {
-      'blade-container': true,
+      Blade__container: true,
       active: this.props.isActive,
     };
 
