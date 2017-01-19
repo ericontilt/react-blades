@@ -1,23 +1,29 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import cx from 'classnames';
 
-const propTypes = {
-  action: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    callback: PropTypes.func.isRequired,
-    iconClass: PropTypes.string,
-    isEnabled: PropTypes.bool,
-    isToggled: PropTypes.bool,
-    badge: PropTypes.number,
-    getTooltip: PropTypes.func,
-  }).isRequired,
+import BladeActionShape from '../shapes/BladeActionShape';
+
+const propTypes = BladeActionShape;
+const defaultProps = {
+  title: '',
+  callback: () => {},
+  iconClass: '',
+  isEnabled: true,
+  isToggled: false,
+  badge: null,
+  getTooltip: null,
 };
 
-const BladeActionButton = ({ action }) => {
-  const isEnabled = action.isEnabled !== undefined ? action.isEnabled : true;
-  const isToggled = action.isToggled !== undefined ? action.isToggles : false;
-
+const BladeActionButton = ({
+  id,
+  title,
+  callback,
+  iconClass,
+  isEnabled,
+  isToggled,
+  badge,
+  getTooltip,
+}) => {
   const buttonClasses = {
     button: true,
     toggled: isToggled,
@@ -33,30 +39,31 @@ const BladeActionButton = ({ action }) => {
   if (isEnabled) {
     clickHandler = (e) => {
       e.preventDefault();
-      action.callback(e);
+      callback(e, { id });
     };
   }
 
-  const title = !isEnabled && typeof action.getTooltip === 'function'
-    ? action.getTooltip()
+  const tooltip = !isEnabled && typeof getTooltip === 'function'
+    ? getTooltip()
     : null;
 
   return (
-    <li>
+    <li className="BladeActionButton">
       <a
         className={cx(buttonClasses)}
         onClick={clickHandler}
-        title={title}
+        title={tooltip}
       >
-        <div className={action.iconClass}>
-          {action.badge !== undefined ? <span className="badge">{action.badge}</span> : null}
+        <div className={iconClass}>
+          {badge !== undefined ? <span className="badge">{badge}</span> : null}
         </div>
-        <div className="title">{action.title}</div>
+        <div className="title">{title}</div>
       </a>
     </li>
   );
 };
 
 BladeActionButton.propTypes = propTypes;
+BladeActionButton.defaultProps = defaultProps;
 
 export default BladeActionButton;
