@@ -1,5 +1,5 @@
 import React from 'react';
-import { Blade } from 'react-blades';
+import { Blade } from '../../../../index';
 import CourseListItem from './CourseListItem';
 import CreateCourse from './CreateCourse';
 import EditCourse from './EditCourse';
@@ -33,7 +33,7 @@ class CourseList extends React.Component {
     const { blades, actions, courses } = this.props;
 
     const bladeActions = [{
-      key: 'new-course',
+      id: 'new-course',
       title: 'New',
       iconClass: 'fa fa-plus',
       callback: () => {

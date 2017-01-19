@@ -17,6 +17,7 @@ components.forEach(component => {
 
 module.exports = {
   entry: entries,
+  devtool: 'source-map',
   output: {
     filename: '[name].js',
     path: './lib/components/',

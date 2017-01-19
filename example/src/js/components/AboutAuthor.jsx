@@ -1,9 +1,9 @@
 import React from 'react';
-import { Blade } from 'react-blades';
+import { Blade } from '../../../../index';
 
 const AboutAuthor = ({ blades, id }) => {
   const bladeActions = [{
-    key: 'back',
+    id: 'back',
     title: 'Back',
     iconClass: 'fa fa-arrow-left',
     callback: () => {

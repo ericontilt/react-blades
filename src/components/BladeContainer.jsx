@@ -15,6 +15,9 @@ const propTypes = {
   left: PropTypes.number.isRequired,
   isVisible: PropTypes.bool.isRequired,
 };
+const defaultProps = {
+  isActive: false,
+};
 
 const defaultZIndex = 1;
 
@@ -62,3 +65,4 @@ export default class BladeContainer extends React.Component {
 }
 
 BladeContainer.propTypes = propTypes;
+BladeContainer.defaultProps = defaultProps;

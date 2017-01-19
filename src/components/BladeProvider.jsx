@@ -5,6 +5,9 @@ const propTypes = {
   blades: PropTypes.instanceOf(BladeManager).isRequired,
   children: PropTypes.any,
 };
+const defaultProps = {
+  children: [],
+};
 
 const childContextTypes = {
   blades: PropTypes.object,
@@ -33,4 +36,5 @@ export default class BladeProvider extends React.Component {
 }
 
 BladeProvider.propTypes = propTypes;
+BladeProvider.defaultProps = defaultProps;
 BladeProvider.childContextTypes = childContextTypes;

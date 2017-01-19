@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 const propTypes = {
   action: PropTypes.shape({
-    key: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     callback: PropTypes.func.isRequired,
     iconClass: PropTypes.string,
@@ -11,7 +11,7 @@ const propTypes = {
     isToggled: PropTypes.bool,
     badge: PropTypes.number,
     getTooltip: PropTypes.func,
-  }),
+  }).isRequired,
 };
 
 const BladeActionButton = ({ action }) => {

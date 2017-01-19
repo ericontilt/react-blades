@@ -7,39 +7,10 @@ const defaultBladeProps = {
   depth: 0,
 };
 
-const blades = {};
-const eventEmitter = new EventEmitter();
-
-const getAllBlades = () =>
-  Object.keys(blades)
-    .map(id => blades[id]);
-
-const getVisibleBlades = () => {
-  const explicitVisible = getAllBlades().filter(blade => blade.isVisible);
-  let i = -1;
-  for (i = explicitVisible.length - 1; i >= 0; i--) {
-    if (explicitVisible[i].depth > 0) {
-      break;
-    }
-  }
-  if (i > -1) {
-    return explicitVisible.slice(i, explicitVisible.length);
-  }
-  return explicitVisible;
-};
-
-const recalculateDimensions = () => {
-  const visibleBlades = getVisibleBlades();
-  let left = 0;
-  for (let i = 0; i < visibleBlades.length; i++) {
-    visibleBlades[i].left = left;
-    left += visibleBlades[i].width;
-  }
-};
-
-export default class {
-  on(event, fn) {
-    return eventEmitter.addListener(event, fn);
+export default class BladeManager extends EventEmitter {
+  constructor() {
+    super();
+    this.blades = [];
   }
 
   add(blade) {
@@ -49,26 +20,53 @@ export default class {
     if (!blade.id) {
       throw new Error('A blade id is mandatory.');
     }
-    blades[blade.id] = Object.assign({}, defaultBladeProps, blade);
-    recalculateDimensions();
-    eventEmitter.trigger('render');
+    this.blades[blade.id] = Object.assign({}, defaultBladeProps, blade);
+    this._recalculateDimensions();
+    this.trigger('render');
   }
 
   remove(id) {
-    blades[id] = null;
-    delete blades[id];
-    recalculateDimensions();
-    eventEmitter.trigger('render');
+    this.blades[id] = null;
+    delete this.blades[id];
+    this._recalculateDimensions();
+    this.trigger('render');
   }
 
   activate(id) {
-    Object.keys(blades).forEach(key => (blades[key].isActive = false));
-    blades[id].isActive = true;
-    eventEmitter.trigger('render');
+    Object.keys(this.blades).forEach(key => (this.blades[key].isActive = false));
+    this.blades[id].isActive = true;
+    this.trigger('render');
   }
 
   getVisible() {
     // TODO: Return an immutable structure here
-    return getVisibleBlades();
+    return this._getVisibleBlades();
+  }
+
+  _getAllBlades() {
+    return Object.keys(this.blades).map(id => this.blades[id]);
+  }
+
+  _getVisibleBlades() {
+    const explicitVisible = this._getAllBlades().filter(blade => blade.isVisible);
+    let i = -1;
+    for (i = explicitVisible.length - 1; i >= 0; i -= 1) {
+      if (explicitVisible[i].depth > 0) {
+        break;
+      }
+    }
+    if (i > -1) {
+      return explicitVisible.slice(i, explicitVisible.length);
+    }
+    return explicitVisible;
+  }
+
+  _recalculateDimensions() {
+    const visibleBlades = this._getVisibleBlades();
+    let left = 0;
+    for (let i = 0; i < visibleBlades.length; i += 1) {
+      visibleBlades[i].left = left;
+      left += visibleBlades[i].width;
+    }
   }
 }

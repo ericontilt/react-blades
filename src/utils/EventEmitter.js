@@ -3,13 +3,13 @@ export default class EventEmitter {
     this.listeners = {};
   }
 
-  addListener(event, fn) {
+  on(event, fn) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
     this.listeners[event].push(fn);
     return () => {
-      this.listeners = this.listeners[event].filter((l) => l !== fn);
+      this.listeners = this.listeners[event].filter(l => l !== fn);
     };
   }
 

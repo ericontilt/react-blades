@@ -13,10 +13,13 @@ const propTypes = {
 };
 
 const defaultProps = {
+  title: '',
+  actions: [],
+  children: [],
   scroll: 'y',
 };
 
-const getScrollStyle = scroll => {
+const getScrollStyle = (scroll) => {
   const style = {
     overflowX: 'hidden',
     overflowY: 'hidden',
@@ -43,12 +46,7 @@ const getScrollStyle = scroll => {
 
 export default class Blade extends React.Component {
   renderActions() {
-    let renderedActions = null;
-    const { actions } = this.props;
-    if (actions && actions.length > 0) {
-      renderedActions = actions.map((action, i) => <BladeActionButton key={i} action={action} />);
-    }
-    return renderedActions;
+    return this.props.actions.map(action => <BladeActionButton key={action.id} action={action} />);
   }
 
   render() {

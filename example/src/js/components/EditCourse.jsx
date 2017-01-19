@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Blade } from 'react-blades';
+import { Blade } from '../../../../index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../actions/courseActions';
@@ -36,14 +36,14 @@ class EditCourse extends React.Component {
     const { blades, actions, course } = this.props;
 
     const bladeActions = [ {
-      key: 'back',
+      id: 'back',
       title: 'Back',
       iconClass: 'fa fa-arrow-left',
       callback: () => {
         blades.remove(this.props.id);
       },
     }, {
-      key: 'save',
+      id: 'save',
       title: 'Save',
       iconClass: 'fa fa-save',
       isEnabled: course.title.length > 0,
@@ -51,7 +51,7 @@ class EditCourse extends React.Component {
         actions.saveCourse(course);
       },
     }, {
-      key: 'about-author',
+      id: 'about-author',
       title: 'About Author',
       iconClass: 'fa fa-info',
       callback: () => {
