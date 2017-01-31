@@ -1,5 +1,5 @@
 import React from 'react';
-import { Blade } from '../../../../index';
+import { Blade } from 'react-blades';
 import CourseListItem from './CourseListItem';
 import CreateCourse from './CreateCourse';
 import EditCourse from './EditCourse';

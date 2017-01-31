@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const srcFolder = path.join(__dirname, 'src', 'components');
+const srcFolder = path.join(__dirname, 'src/js/components');
 const components = fs.readdirSync(srcFolder);
 
 const files = [];
@@ -9,7 +9,7 @@ const entries = {};
 components.forEach(component => {
   const name = component.split('.')[0];
   if (name.length === 0) return;
-  const file = `./src/components/${name}`;
+  const file = `./src/js/components/${name}`;
   console.log(`Found component ${name}..`);
   files.push(file);
   entries[name] = file;
@@ -20,7 +20,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: './lib/components/',
+    path: './dist/components/',
     libraryTarget: 'commonjs2',
   },
   externals(context, request, callback) {
@@ -36,7 +36,7 @@ module.exports = {
       {
         test: /\.js/,
         loader: 'babel-loader',
-        include: path.join(__dirname, 'src'),
+        include: path.join(__dirname, 'src/js'),
         query: {
           presets: ['airbnb']
         }
@@ -44,7 +44,7 @@ module.exports = {
       {
         test: /\.jsx/,
         loader: 'babel-loader',
-        include: path.join(__dirname, 'src'),
+        include: path.join(__dirname, 'src/js'),
         query: {
           presets: ['airbnb']
         }

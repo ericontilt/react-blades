@@ -1,0 +1,92 @@
+.Blade .Blade__header {
+  position: relative;
+  color: white;
+  z-index: 1; }
+  .Blade .Blade__header h1 {
+    padding: 0 10px;
+    margin: 0;
+    vertical-align: middle;
+    color: white;
+    background-color: #06070E;
+    height: 40px;
+    line-height: 40px;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+
+.Blade .Blade__actions ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: none;
+  word-wrap: break-word;
+  background-color: #29524A;
+  height: 50px; }
+
+.Blade .Blade__content {
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  left: 0;
+  top: 90px;
+  right: 0;
+  bottom: 0;
+  z-index: 1; }
+
+.BladeActionButton {
+  float: left; }
+
+.BladeActionButton__button {
+  display: block;
+  background-color: #29524A;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  line-height: 12px;
+  height: 50px;
+  width: 65px;
+  border: 0; }
+  .BladeActionButton__button [class*="fa-"] {
+    font-size: 16px;
+    padding-bottom: 1px;
+    margin-top: 2px; }
+  .BladeActionButton__button:focus {
+    outline: 0; }
+  .BladeActionButton__button:hover {
+    background-color: #326359; }
+  .BladeActionButton__button:active, .BladeActionButton__button.active {
+    background-color: #3a7469; }
+
+.BladeActionButton__button--disabled {
+  background-color: #29524A;
+  color: #aaaaaa; }
+
+.BladeActionButton__button--toggled {
+  -webkit-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75); }
+
+.Blade__presenter {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0;
+  font-family: "Trebuchet MS", Helvetica, sans-serif; }
+  .Blade__presenter * {
+    box-sizing: border-box; }
+
+.Blade__container {
+  border-right: 1px solid #06070E;
+  font-size: 14px;
+  background-color: #C5AFA0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  white-space: normal; }

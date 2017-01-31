@@ -9,8 +9,8 @@ module.exports = (config) => {
     frameworks: ['mocha', 'sinon', 'chai'],
 
     files: [
-      'tests/_helpers/restoreSinonStubs.js',
-      'tests/components/*',
+      'test/_helpers/restoreSinonStubs.js',
+      'test/components/*',
     ],
 
     webpack: {
@@ -31,7 +31,7 @@ module.exports = (config) => {
             test: /\.jsx?$/,
             loader: 'babel-loader',
             include: [
-              path.join(__dirname, 'src'),
+              path.join(__dirname, 'src/js'),
               path.join(__dirname, 'test'),
               require.resolve('airbnb-js-shims'),
             ],
@@ -43,7 +43,7 @@ module.exports = (config) => {
             test: /\.svg$/,
             loader: 'babel!react-svg',
             include: [
-              path.join(__dirname, 'src'),
+              path.join(__dirname, 'src/js'),
             ],
           },
           { test: /\.json$/, loader: 'json-loader' },
@@ -65,7 +65,7 @@ module.exports = (config) => {
     },
 
     preprocessors: {
-      'tests/**/*': ['webpack'],
+      'test/**/*': ['webpack'],
     },
 
     reporters: ['progress'],

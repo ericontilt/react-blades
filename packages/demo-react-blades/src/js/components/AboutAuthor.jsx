@@ -1,5 +1,5 @@
 import React from 'react';
-import { Blade } from '../../../../index';
+import { Blade } from 'react-blades';
 
 const AboutAuthor = ({ blades, id }) => {
   const bladeActions = [{

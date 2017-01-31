@@ -5,16 +5,12 @@ var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 var config = {
-  //Entry points to the project
   entry: [
     path.join(__dirname, '/src/js/app.jsx'),
   ],
-  //Config options on how to interpret requires imports
   resolve: {
     extensions: ["", ".js", ".jsx"],
-    //node_modules: ["web_modules", "node_modules"]  (Default Settings)
   },
-  //Server Configuration options
   devServer:{
     contentBase: 'src/www',  //Relative directory for base of server
     devtool: 'source-map',
@@ -29,11 +25,7 @@ var config = {
     filename: 'app.js',
   },
   plugins: [
-    //Enables Hot Modules Replacement
-    // new webpack.HotModuleReplacementPlugin(),
-    //Allows error warnings but does not stop compiling. Will remove when eslint is added
     new webpack.NoErrorsPlugin(),
-    //Moves files
     new TransferWebpackPlugin([
       {from: 'www'},
     ], path.resolve(__dirname, "src")),
@@ -51,9 +43,8 @@ var config = {
     // ],
     loaders: [
       {
-        //React-hot loader and
-        test: /\.(js|jsx)$/,  //All .js and .jsx files
-        loaders: ['babel'], //babel loads jsx and es6-7
+        test: /\.jsx?/,
+        loaders: ['babel'],
         exclude: [nodeModulesPath],
       },
       { test: /\.css$/, loader: "style!css" },
