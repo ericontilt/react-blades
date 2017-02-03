@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 // import sinon from 'sinon-sandbox';
 import { shallow } from 'enzyme';
-import BladeActionButton from '../../src/components/BladeActionButton';
+import BladeActionButton from '../../src/js/components/BladeActionButton';
 
 describe('BladeActionButton', () => {
   let action;
