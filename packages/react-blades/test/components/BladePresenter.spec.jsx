@@ -1,6 +1,5 @@
 import React from 'react';
 import { expect } from 'chai';
-import sinon from 'sinon-sandbox';
 import { shallow } from 'enzyme';
 import BladePresenter from '../../src/js/components/BladePresenter';
 
@@ -10,12 +9,12 @@ describe('BladePresenter', () => {
       const visibleBlades = {
         blades: {
           getVisible: () => ([]),
-        }
+        },
       };
       const wrapper = shallow(<BladePresenter />, {
         context: visibleBlades,
       });
-      expect(wrapper.is('.BladePresenter')).to.be.true;
+      expect(wrapper.is('.BladePresenter')).to.equal(true);
     });
 
     describe('#getVisible', () => {
@@ -27,7 +26,7 @@ describe('BladePresenter', () => {
             }, {
               id: 2,
             }]),
-          }
+          },
         };
         const wrapper = shallow(<BladePresenter />, {
           context: visibleBlades,
