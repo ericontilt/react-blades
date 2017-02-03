@@ -28,7 +28,7 @@ const BladeActionButton = ({
 
   let clickHandler = () => {};
   if (isEnabled) {
-    clickHandler = e => {
+    clickHandler = (e) => {
       if (e) e.preventDefault();
       onClick(e, { id });
     };
@@ -43,7 +43,7 @@ const BladeActionButton = ({
         onClick={clickHandler}
         title={tooltip}
       >
-        <i className={iconClass}></i>
+        <i className={iconClass} />
         <div className="BladeActionButton_title">{title}</div>
       </button>
     </li>

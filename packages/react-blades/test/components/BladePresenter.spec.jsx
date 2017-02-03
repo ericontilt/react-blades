@@ -22,9 +22,9 @@ describe('BladePresenter', () => {
         const visibleBlades = {
           blades: {
             getVisible: () => ([{
-              id: 1,
+              id: 'A',
             }, {
-              id: 2,
+              id: 'B',
             }]),
           },
         };

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import EventEmitter from '../utils/EventEmitter';
 
 const defaultBladeProps = {

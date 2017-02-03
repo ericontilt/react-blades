@@ -24,7 +24,7 @@ const defaultZIndex = 1;
 export default class BladeContainer extends React.Component {
   componentDidMount() {
     this.bladeClickListener = attachClickHandler(this.blade,
-      () => this.props.blades.activate(this.props.id)
+      () => this.props.blades.activate(this.props.id),
     );
     this.props.blades.activate(this.props.id);
     window.scrollTo(this.props.left, 0);
