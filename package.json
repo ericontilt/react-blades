@@ -4,17 +4,8 @@
   "description": "Horizontal stacking window panels.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && npm run build:js && npm run build:css && npm run build:svg",
-    "build:css": "node-sass css/styles.scss lib/css/_blades.css",
-    "build:js": "babel src/ -d lib/ --ignore src/components",
-    "build:svg": "webpack",
-    "clean": "rimraf lib",
-    "lint": "eslint --ext .js,.jsx src",
-    "mocha": "mocha --compilers js:babel-register,jsx:babel-register --require airbnb-js-shims --recursive ./test/_helpers",
-    "pretest": "npm run --silent lint",
-    "tests-only": "npm run mocha --silent test",
-    "tests-karma": "karma start",
-    "test": "npm run tests-only && npm run tests-karma"
+    "build": "lerna run build",
+    "tests-watch": "lerna run tests-watch"
   },
   "repository": {
     "type": "git",
@@ -34,6 +25,5 @@
   "homepage": "https://github.com/ericberagg/react-blades#readme",
   "devDependencies": {
     "lerna": "2.0.0-beta.36"
-  },
-  "dependencies": {}
+  }
 }
