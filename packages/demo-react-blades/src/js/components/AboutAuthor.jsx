@@ -6,7 +6,7 @@ const AboutAuthor = ({ blades, id }) => {
     id: 'back',
     title: 'Back',
     iconClass: 'fa fa-arrow-left',
-    callback: () => {
+    onClick: () => {
       blades.remove(id);
     },
   }];

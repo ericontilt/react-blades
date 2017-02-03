@@ -36,7 +36,7 @@ class CourseList extends React.Component {
       id: 'new-course',
       title: 'New',
       iconClass: 'fa fa-plus',
-      callback: () => {
+      onClick: () => {
         actions.initNewCourse();
         blades.add({
           id: 'course-details',

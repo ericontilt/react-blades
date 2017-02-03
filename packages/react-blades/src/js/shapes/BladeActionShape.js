@@ -7,6 +7,5 @@ export default {
   iconClass: PropTypes.string,
   isEnabled: PropTypes.bool,
   isToggled: PropTypes.bool,
-  badge: PropTypes.number,
-  getTooltip: PropTypes.func,
+  tooltip: PropTypes.string,
 };

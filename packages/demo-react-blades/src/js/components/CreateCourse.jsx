@@ -36,7 +36,7 @@ class CreateCourse extends React.Component {
       id: 'back',
       title: 'Back',
       iconClass: 'fa fa-arrow-left',
-      callback: () => {
+      onClick: () => {
         blades.remove(this.props.id);
       },
     }, {
@@ -44,7 +44,7 @@ class CreateCourse extends React.Component {
       title: 'Save',
       iconClass: 'fa fa-save',
       isEnabled: course.title.length > 0,
-      callback: () => {
+      onClick: () => {
         actions.saveCourse(course);
       },
     }];

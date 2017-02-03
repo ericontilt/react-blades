@@ -34,7 +34,6 @@
   "homepage": "https://github.com/ericberagg/react-blades#readme",
   "devDependencies": {
     "babel-plugin-syntax-jsx": "^6.13.0",
-    "babel-register": "^6.11.6",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "3.0.2",

@@ -5,7 +5,7 @@
 node_modules
 
 # build folder
-lib
+dist/
 
 # typescript definitions
 typings/

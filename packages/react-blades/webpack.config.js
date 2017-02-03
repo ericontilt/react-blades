@@ -32,24 +32,14 @@ module.exports = {
     return callback(null, true);
   },
   module: {
-    loaders: [
-      {
-        test: /\.js/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, 'src/js'),
-        query: {
-          presets: ['airbnb']
-        }
-      },
-      {
-        test: /\.jsx/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, 'src/js'),
-        query: {
-          presets: ['airbnb']
-        }
+    loaders: [{
+      test: /\.jsx?/,
+      loader: 'babel-loader',
+      include: path.join(__dirname, 'src/js'),
+      query: {
+        presets: ['airbnb']
       }
-    ],
+    }],
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],

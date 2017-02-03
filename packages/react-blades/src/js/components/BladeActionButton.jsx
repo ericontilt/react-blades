@@ -6,23 +6,21 @@ import BladeActionShape from '../shapes/BladeActionShape';
 const propTypes = BladeActionShape;
 const defaultProps = {
   title: '',
-  callback: () => {},
+  onClick: () => {},
   iconClass: '',
   isEnabled: true,
   isToggled: false,
-  badge: null,
-  getTooltip: null,
+  tooltip: null,
 };
 
 const BladeActionButton = ({
   id,
   title,
-  callback,
+  onClick,
   iconClass,
   isEnabled,
   isToggled,
-  badge,
-  getTooltip,
+  tooltip,
 }) => {
   const modifiersForButton = [];
   if (isToggled) modifiersForButton.push('toggled');
@@ -30,15 +28,11 @@ const BladeActionButton = ({
 
   let clickHandler = () => {};
   if (isEnabled) {
-    clickHandler = (e) => {
-      e.preventDefault();
-      callback(e, { id });
+    clickHandler = e => {
+      if (e) e.preventDefault();
+      onClick(e, { id });
     };
   }
-
-  const tooltip = !isEnabled && typeof getTooltip === 'function'
-    ? getTooltip()
-    : null;
 
   return (
     <li className="BladeActionButton">
@@ -49,9 +43,7 @@ const BladeActionButton = ({
         onClick={clickHandler}
         title={tooltip}
       >
-        <i className={iconClass}>
-          {badge !== undefined ? <span className="badge">{badge}</span> : null}
-        </i>
+        <i className={iconClass}></i>
         <div className="BladeActionButton_title">{title}</div>
       </button>
     </li>
