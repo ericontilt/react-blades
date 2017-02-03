@@ -11,6 +11,5 @@ exports['default'] = {
   iconClass: _react.PropTypes.string,
   isEnabled: _react.PropTypes.bool,
   isToggled: _react.PropTypes.bool,
-  badge: _react.PropTypes.number,
-  getTooltip: _react.PropTypes.func
+  tooltip: _react.PropTypes.string
 };
