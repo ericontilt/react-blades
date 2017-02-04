@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import BladePresenter from '../../src/js/components/BladePresenter';
 
@@ -14,7 +13,7 @@ describe('BladePresenter', () => {
       const wrapper = shallow(<BladePresenter />, {
         context: visibleBlades,
       });
-      expect(wrapper.is('.BladePresenter')).to.equal(true);
+      expect(wrapper.is('.BladePresenter')).toEqual(true);
     });
 
     describe('#getVisible', () => {
@@ -23,15 +22,21 @@ describe('BladePresenter', () => {
           blades: {
             getVisible: () => ([{
               id: 'A',
+              component: { type: () => {} },
+              width: 100,
+              left: 0,
             }, {
               id: 'B',
+              component: { type: () => {} },
+              width: 200,
+              left: 100,
             }]),
           },
         };
         const wrapper = shallow(<BladePresenter />, {
           context: visibleBlades,
         });
-        expect(wrapper.find('BladeContainer')).to.have.length(2);
+        expect(wrapper.find('BladeContainer').length).toBe(2);
       });
     });
   });

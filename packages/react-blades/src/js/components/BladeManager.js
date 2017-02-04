@@ -21,6 +21,7 @@ export default class BladeManager extends EventEmitter {
     if (!blade.id) {
       throw new Error('A blade id is mandatory.');
     }
+    // TODO: reset all isActive fields when adding a new active blade
     this.blades[blade.id] = Object.assign({}, defaultBladeProps, blade);
     this._recalculateDimensions();
     this.trigger('render');

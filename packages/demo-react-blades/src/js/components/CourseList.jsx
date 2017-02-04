@@ -45,7 +45,7 @@ class CourseList extends React.Component {
           component: {
             type: CreateCourse,
           },
-        })
+        }),
       },
     }]
 

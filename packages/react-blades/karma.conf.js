@@ -1,56 +1,48 @@
 /* eslint no-param-reassign:0, import/no-extraneous-dependencies:0 */
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 module.exports = (config) => {
   config.set({
     basePath: '',
 
-    frameworks: ['mocha', 'sinon', 'chai'],
+    frameworks: ['jasmine'],
 
     files: [
-      'test/_helpers/restoreSinonStubs.js',
       'test/components/*',
     ],
 
     webpack: {
-      externals: {
-        sinon: true,
-      },
+      // externals: {
+      //   sinon: true,
+      // },
       plugins: [
         // https://github.com/cheeriojs/cheerio/issues/836
-        new webpack.NormalModuleReplacementPlugin(/^\.\/package$/, (result) => {
-          if (/cheerio/.test(result.context)) {
-            result.request = './package.json';
-          }
-        }),
+        // new webpack.NormalModuleReplacementPlugin(/^\.\/package$/, (result) => {
+        //   if (/cheerio/.test(result.context)) {
+        //     result.request = './package.json';
+        //   }
+        // }),
       ],
       module: {
-        loaders: [
-          {
-            test: /\.jsx?$/,
-            loader: 'babel-loader',
-            include: [
-              path.join(__dirname, 'src/js'),
-              path.join(__dirname, 'test'),
-              require.resolve('airbnb-js-shims'),
-            ],
-            query: {
-              presets: ['airbnb'],
-            },
+        loaders: [{
+          test: /\.jsx?$/,
+          loader: 'babel-loader',
+          include: [
+            path.join(__dirname, 'src/js'),
+            path.join(__dirname, 'test'),
+            require.resolve('airbnb-js-shims'),
+          ],
+          query: {
+            presets: ['airbnb'],
           },
-          {
-            test: /\.svg$/,
-            loader: 'babel!react-svg',
-            include: [
-              path.join(__dirname, 'src/js'),
-            ],
-          },
-          { test: /\.json$/, loader: 'json-loader' },
-
+        }, {
+          test: /\.json$/,
+          loader: 'json-loader',
+        }, {
           // Inject the Airbnb shims into the bundle
-          { test: /test\/_helpers/, loader: 'imports?shims=airbnb-js-shims' },
-        ],
+          test: /test\/_helpers/, loader: 'imports?shims=airbnb-js-shims',
+        }],
       },
       resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -68,7 +60,11 @@ module.exports = (config) => {
       'test/**/*': ['webpack'],
     },
 
-    reporters: ['progress'],
+    reporters: ['spec'],
+
+    specReporter: {
+      showSpecTiming: true,
+    },
 
     port: 9876,
 

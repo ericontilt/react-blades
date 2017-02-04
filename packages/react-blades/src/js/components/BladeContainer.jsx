@@ -13,10 +13,11 @@ const propTypes = {
   width: PropTypes.number.isRequired,
   isActive: PropTypes.bool,
   left: PropTypes.number.isRequired,
-  isVisible: PropTypes.bool.isRequired,
+  isVisible: PropTypes.bool,
 };
 const defaultProps = {
   isActive: false,
+  isVisible: true,
 };
 
 const defaultZIndex = 1;
