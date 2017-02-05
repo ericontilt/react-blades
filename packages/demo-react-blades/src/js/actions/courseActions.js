@@ -1,9 +1,14 @@
 import * as actionTypes from './actionTypes';
 import CourseApi from '../api/mockCourseApi';
 
-const saveCourseSuccess = course => {
-  return { type: actionTypes.SAVE_COURSE_SUCCESS, course };
-};
+export function initNewCourse() {
+  return { type: actionTypes.INIT_NEW_COURSE };
+}
+
+const saveCourseSuccess = course => ({
+  type: actionTypes.SAVE_COURSE_SUCCESS,
+  course,
+});
 
 export function saveCourse(course) {
   return dispatch => {
@@ -16,10 +21,6 @@ export function saveCourse(course) {
       throw error;
     });
   };
-}
-
-export function initNewCourse() {
-  return { type: actionTypes.INIT_NEW_COURSE };
 }
 
 export function editCourse(course) {
@@ -38,9 +39,10 @@ export function changeCourseCategory(category) {
   return { type: actionTypes.CHANGE_COURSE_CATEGORY, category };
 }
 
-const loadCoursesSuccess = courses => {
-  return { type: actionTypes.LOAD_COARSES_SUCCESS, courses };
-};
+const loadCoursesSuccess = courses => ({
+  type: actionTypes.LOAD_COARSES_SUCCESS,
+  courses,
+});
 
 export function loadCourses() {
   return dispatch => {

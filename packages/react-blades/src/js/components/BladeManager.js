@@ -16,7 +16,10 @@ export default class BladeManager extends EventEmitter {
 
   add(blade) {
     if (!blade || !blade.id) {
-      throw new Error('A blade id is mandatory.');
+      throw new Error('A blade ID is mandatory.');
+    }
+    if (this._findById(blade.id)) {
+      throw new Error(`Blade with ID=${blade.id} already exists.`);
     }
     this._addToCollection(blade);
     this._recalculateDimensions();
@@ -25,8 +28,13 @@ export default class BladeManager extends EventEmitter {
   }
 
   remove(id) {
+    if (!this._findById(id)) {
+      throw new Error(`Blade with ID=${id} not found.`);
+    }
     this._removeFromCollection(id);
-    this._recalculateDimensions();
+    if (this.blades.length > 0) {
+      this._activateById(this._last().id);
+    }
     this.trigger('render');
   }
 
@@ -35,8 +43,25 @@ export default class BladeManager extends EventEmitter {
     this.trigger('render');
   }
 
+  back(id) {
+    if (id) {
+      const end = Math.min(this.blades.findIndex(b => b.id === id) + 1, this.blades.length);
+      this.blades = this.blades.slice(0, end);
+    } else {
+      this.blades = this.blades.slice(0, this.blades.length - 1);
+    }
+  }
+
   getVisible() {
     return this._getVisibleBlades();
+  }
+
+  _last() {
+    return this.blades[this.blades.length - 1];
+  }
+
+  _findById(id) {
+    return this.blades.find(b => b.id === id);
   }
 
   _addToCollection(blade) {

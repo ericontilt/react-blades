@@ -10,12 +10,12 @@ import * as courseActions from '../actions/courseActions';
 
 const propTypes = {
   blades: PropTypes.object.isRequired,
-  actions: PropTypes.array,
+  actions: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
   courses: PropTypes.array,
 };
 
 const defaultProps = {
-  actions: [],
   courses: [],
 };
 
@@ -26,7 +26,8 @@ class CourseList extends React.Component {
   }
 
   handleCourseClick(course) {
-    const { blades, actions } = this.props;
+    const { blades, actions, id } = this.props;
+    blades.back(id);
     actions.editCourse(course);
     blades.add({
       id: 'edit-course',
@@ -48,13 +49,14 @@ class CourseList extends React.Component {
   }
 
   render() {
-    const { blades, actions, courses } = this.props;
+    const { blades, actions, courses, id } = this.props;
 
     const bladeActions = [{
       id: 'new-course',
       title: 'New',
       iconClass: 'fa fa-plus',
       onClick: () => {
+        blades.back(id);
         actions.initNewCourse();
         blades.add({
           id: 'course-details',

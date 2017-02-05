@@ -16,7 +16,12 @@ describe('BladeManager', () => {
 
   describe('#add', () => {
     it('throws if blade id is missing', () => {
-      expect(() => manager.add({})).toThrowError('A blade id is mandatory.');
+      expect(() => manager.add({})).toThrowError(/id is mandatory/i);
+    });
+
+    it('throws if blade id already exists', () => {
+      manager.add({ id: 'test' });
+      expect(() => manager.add({ id: 'test' })).toThrowError(/already exists/i);
     });
 
     it('adds to blade the collection', () => {
@@ -53,19 +58,55 @@ describe('BladeManager', () => {
       manager.add({ id: 'visible2', isVisible: true, width: 200 });
     });
 
+    it('throws if the given ID does not exist', () => {
+      expect(() => manager.remove('nonexistent')).toThrowError(/not found/i);
+    });
+
     it('removes the blade from the collection', () => {
       manager.remove('visible2');
       expect(manager.getVisible().length).toBe(1);
     });
 
-    it('removes any blade following the remove blade from the collection', () => {
+    it('removes any blade following the removed blade from the collection', () => {
       manager.remove('visible1');
       expect(manager.getVisible().length).toBe(0);
+    });
+
+    it('activates the last blade in the collection', () => {
+      manager.remove('visible2');
+      expect(manager.getVisible()[0].isActive).toBeTruthy();
     });
 
     it('triggers a render', () => {
       manager.remove('visible2');
       expect(manager.trigger).toHaveBeenCalledWith('render');
+    });
+  });
+
+  describe('#back', () => {
+    beforeEach(() => {
+      manager.add({ id: 'visible1', isVisible: true, width: 100 });
+      manager.add({ id: 'visible2', isVisible: true, width: 200 });
+      manager.add({ id: 'visible3', isVisible: true, width: 300 });
+    });
+
+    it('removes all blades found after id match from collection', () => {
+      manager.back('visible1');
+      expect(manager.getVisible().length).toBe(1);
+      expect(manager.getVisible()[0].id).toBe('visible1');
+    });
+
+    it('works for last blade in the collection', () => {
+      manager.back('visible3');
+      expect(manager.getVisible().length).toBe(3);
+    });
+
+    it('pops the last element from the collection if called without an id', () => {
+      manager.back();
+      const visible = manager.getVisible();
+      expect(visible.length).toBe(2);
+      expect(visible[0].id).toBe('visible1');
+      expect(visible[1].id).toBe('visible2');
     });
   });
 
