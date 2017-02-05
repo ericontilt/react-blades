@@ -15,57 +15,58 @@ export default class BladeManager extends EventEmitter {
   }
 
   add(blade) {
-    if (!blade) {
-      return;
-    }
-    if (!blade.id) {
+    if (!blade || !blade.id) {
       throw new Error('A blade id is mandatory.');
     }
-    // TODO: reset all isActive fields when adding a new active blade
-    this.blades[blade.id] = Object.assign({}, defaultBladeProps, blade);
+    this._addToCollection(blade);
     this._recalculateDimensions();
+    this._activateById(blade.id);
     this.trigger('render');
   }
 
   remove(id) {
-    this.blades[id] = null;
-    delete this.blades[id];
+    this._removeFromCollection(id);
     this._recalculateDimensions();
     this.trigger('render');
   }
 
   activate(id) {
-    Object.keys(this.blades).forEach(key => (this.blades[key].isActive = false));
-    this.blades[id].isActive = true;
+    this._activateById(id);
     this.trigger('render');
   }
 
   getVisible() {
-    // TODO: Return an immutable structure here
     return this._getVisibleBlades();
   }
 
-  _getAllBlades() {
-    return Object.keys(this.blades).map(id => this.blades[id]);
+  _addToCollection(blade) {
+    this.blades = this.blades.concat(Object.assign({}, defaultBladeProps, blade, {
+      index: Object.keys(this.blades).length,
+    }));
+  }
+
+  _removeFromCollection(id) {
+    this.blades = this.blades.slice(0, this.blades.findIndex(b => b.id === id));
+  }
+
+  _activateById(id) {
+    this.blades = this.blades.map(b => Object.assign({}, b, {
+      isActive: b.id === id,
+    }));
   }
 
   _getVisibleBlades() {
-    const explicitVisible = this._getAllBlades().filter(blade => blade.isVisible);
-    let i = -1;
-    for (i = explicitVisible.length - 1; i >= 0; i -= 1) {
-      if (explicitVisible[i].depth > 0) {
-        break;
-      }
+    const visible = this.blades.filter(b => b.isVisible);
+    const bladeWithDepth = [].concat(visible).reverse().find(b => b.depth > 0);
+    if (bladeWithDepth) {
+      return visible.slice(visible.indexOf(bladeWithDepth), visible.length);
     }
-    if (i > -1) {
-      return explicitVisible.slice(i, explicitVisible.length);
-    }
-    return explicitVisible;
+    return visible;
   }
 
   _recalculateDimensions() {
-    const visibleBlades = this._getVisibleBlades();
     let left = 0;
+    const visibleBlades = this._getVisibleBlades();
     for (let i = 0; i < visibleBlades.length; i += 1) {
       visibleBlades[i].left = left;
       left += visibleBlades[i].width;

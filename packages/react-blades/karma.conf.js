@@ -24,6 +24,7 @@ module.exports = (config) => {
         //   }
         // }),
       ],
+      devtool: 'inline-source-map',
       module: {
         loaders: [{
           test: /\.jsx?$/,

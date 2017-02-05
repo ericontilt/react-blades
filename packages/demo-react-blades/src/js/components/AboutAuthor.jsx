@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Blade } from 'react-blades';
 
-const AboutAuthor = ({ blades, id }) => {
+const propTypes = {
+  id: PropTypes.string.isRequired,
+  blades: PropTypes.object.isRequired,
+};
+
+export default function AboutAuthor({ blades, id }) {
   const bladeActions = [{
     id: 'back',
     title: 'Back',
@@ -25,6 +30,6 @@ const AboutAuthor = ({ blades, id }) => {
       </div>
     </Blade>
   );
-};
+}
 
-export default AboutAuthor;
+AboutAuthor.propTypes = propTypes;

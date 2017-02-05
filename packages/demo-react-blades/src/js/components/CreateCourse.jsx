@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Blade } from 'react-blades';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../actions/courseActions';
 
 const propTypes = {
-  blades: React.PropTypes.object.isRequired
+  blades: PropTypes.object.isRequired,
+  actions: PropTypes.array,
+  id: PropTypes.string.isRequired,
+  course: PropTypes.object.isRequired,
+};
+const defaultProps = {
+  actions: [],
 };
 
 class CreateCourse extends React.Component {
@@ -32,7 +38,7 @@ class CreateCourse extends React.Component {
   render() {
     const { blades, actions, course } = this.props;
 
-    const bladeActions = [ {
+    const bladeActions = [{
       id: 'back',
       title: 'Back',
       iconClass: 'fa fa-arrow-left',
@@ -86,20 +92,17 @@ class CreateCourse extends React.Component {
       </Blade>
     );
   }
-};
+}
 
 CreateCourse.propTypes = propTypes;
+CreateCourse.defaultProps = defaultProps;
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    course: state.course,
-  };
-};
+const mapStateToProps = state => ({
+  course: state.course,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(courseActions, dispatch),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(courseActions, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCourse);

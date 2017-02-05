@@ -1,12 +1,15 @@
 {
   "globals": {
+    "jasmine": true,
+    "expect": true,
     "describe": true,
     "context": true,
     "it": true,
     "before": true,
     "after": true,
     "beforeEach": true,
-    "afterEach": true
+    "afterEach": true,
+    "spyOn": true
   },
   "extends": "airbnb",
   "rules": {

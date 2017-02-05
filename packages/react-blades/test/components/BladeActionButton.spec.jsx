@@ -52,7 +52,7 @@ describe('BladeActionButton', () => {
 
     describe('props.onClick with callback handler', () => {
       it('attaches click handler to button', () => {
-        let onClickSpy = jasmine.createSpy();
+        const onClickSpy = jasmine.createSpy();
         const action = { id: 'btn', onClick: onClickSpy };
         const wrapper = shallow(<BladeActionButton {...action} />);
         wrapper.find('button').simulate('click');

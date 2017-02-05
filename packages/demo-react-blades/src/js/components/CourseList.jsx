@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Blade } from 'react-blades';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import CourseListItem from './CourseListItem';
 import CreateCourse from './CreateCourse';
 import EditCourse from './EditCourse';
 import * as courseActions from '../actions/courseActions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+
+const propTypes = {
+  blades: PropTypes.object.isRequired,
+  actions: PropTypes.array,
+  courses: PropTypes.array,
+};
+
+const defaultProps = {
+  actions: [],
+  courses: [],
+};
 
 class CourseList extends React.Component {
   constructor(props) {
@@ -25,8 +37,14 @@ class CourseList extends React.Component {
     });
   }
 
-  courseRow(course, index) {
-    return <CourseListItem course={course} key={course.id} onCourseClick={this.handleCourseClick} />;
+  courseRow(course) {
+    return (
+      <CourseListItem
+        course={course}
+        key={course.id}
+        onCourseClick={this.handleCourseClick}
+      />
+    );
   }
 
   render() {
@@ -45,9 +63,9 @@ class CourseList extends React.Component {
           component: {
             type: CreateCourse,
           },
-        }),
+        });
       },
-    }]
+    }];
 
     return (
       <Blade
@@ -60,18 +78,17 @@ class CourseList extends React.Component {
       </Blade>
     );
   }
-};
+}
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    courses: state.courses,
-  };
-};
+CourseList.propTypes = propTypes;
+CourseList.defaultProps = defaultProps;
 
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(courseActions, dispatch),
-  };
-};
+const mapStateToProps = state => ({
+  courses: state.courses,
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(courseActions, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseList);
