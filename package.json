@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/ericberagg/react-blades#readme",
   "devDependencies": {
+    "flow-bin": "^0.38.0",
     "lerna": "2.0.0-beta.36"
   }
 }
