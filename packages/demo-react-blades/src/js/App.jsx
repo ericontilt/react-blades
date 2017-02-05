@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { BladeManager, BladeProvider, BladePresenter } from 'react-blades';
-import '../css/main.css';
 import 'react-blades/dist/css/_blades.css';
+import '../css/main.css';
 import configureStore from './store/configureStore';
-import { loadCourses } from './actions/courseActions.js';
+import { loadCourses } from './actions/courseActions';
 import CourseList from './components/CourseList';
 
 const store = configureStore();

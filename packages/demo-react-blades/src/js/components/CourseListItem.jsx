@@ -10,7 +10,7 @@ const defaultProps = {
 
 export default function CourseListItem({ course, onCourseClick }) {
   const handleCourseClick = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     onCourseClick(course);
   };
   return (
