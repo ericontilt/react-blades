@@ -76,6 +76,10 @@ module.exports = (config) => {
     autoWatch: false,
 
     browsers: ['Chrome'],
+    captureTimeout: 60000,
+    browserDisconnectTimeout: 10000,
+    browserDisconnectTolerance: 3,
+    browserNoActivityTimeout: 60000,
 
     singleRun: true,
 
