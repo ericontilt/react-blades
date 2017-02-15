@@ -6,6 +6,7 @@ import * as courseActions from '../actions/courseActions';
 import AboutAuthor from './AboutAuthor';
 
 const propTypes = {
+  id: PropTypes.string.isRequired,
   blades: PropTypes.object.isRequired,
   course: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
@@ -18,6 +19,22 @@ class EditCourse extends React.Component {
     this.handleCourseTitleChange = this.handleCourseTitleChange.bind(this);
     this.handleCourseLengthChange = this.handleCourseLengthChange.bind(this);
     this.handleCourseCategoryChange = this.handleCourseCategoryChange.bind(this);
+    this.onRemoveBlade = this.onRemoveBlade.bind(this);
+  }
+
+  componentDidMount() {
+    this.unsubscribeBeforeRemove = this.props.blades.on('beforeRemove', this.onRemoveBlade);
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeBeforeRemove();
+  }
+
+  onRemoveBlade(e) {
+    const { id, course } = this.props;
+    if (e && e.id === id && course.hasUnsavedChanges) {
+      e.cancel();
+    }
   }
 
   handleCourseTitleChange(e) {
@@ -35,7 +52,7 @@ class EditCourse extends React.Component {
   render() {
     const { blades, actions, course } = this.props;
 
-    const bladeActions = [ {
+    const bladeActions = [{
       id: 'back',
       title: 'Back',
       iconClass: 'fa fa-arrow-left',
@@ -59,9 +76,9 @@ class EditCourse extends React.Component {
           id: 'about-course-author',
           depth: 1,
           component: {
-            type: AboutAuthor
-          }
-        })
+            type: AboutAuthor,
+          },
+        });
       },
     }];
 
@@ -102,20 +119,16 @@ class EditCourse extends React.Component {
       </Blade>
     );
   }
-};
+}
 
 EditCourse.propTypes = propTypes;
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    course: state.course,
-  };
-};
+const mapStateToProps = state => ({
+  course: state.course,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(courseActions, dispatch),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(courseActions, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditCourse);

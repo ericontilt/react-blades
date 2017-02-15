@@ -31,6 +31,14 @@ export default class BladeManager extends EventEmitter {
     if (!this._findById(id)) {
       throw new Error(`Blade with ID=${id} not found.`);
     }
+
+    let canceled = false;
+    this.trigger('beforeRemove', {
+      id,
+      cancel() { canceled = true; },
+    });
+    if (canceled) return;
+
     this._removeFromCollection(id);
     if (this.blades.length > 0) {
       this._activateById(this._last().id);

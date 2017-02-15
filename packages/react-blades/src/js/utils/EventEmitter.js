@@ -9,7 +9,8 @@ export default class EventEmitter {
     }
     this.listeners[event].push(fn);
     return () => {
-      this.listeners = this.listeners[event].filter(l => l !== fn);
+      this.listeners[event].splice(this.listeners[event].indexOf(fn));
+      // this.listeners = this.listeners[event].filter(l => l !== fn);
     };
   }
 

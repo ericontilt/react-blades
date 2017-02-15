@@ -18,16 +18,19 @@ export default function courseReducer(state = {}, action) {
     case actionTypes.CHANGE_COURSE_TITLE:
       return Object.assign({}, state, {
         title: action.title,
+        hasUnsavedChanges: true,
       });
 
     case actionTypes.CHANGE_COURSE_LENGTH:
       return Object.assign({}, state, {
         length: action.length,
+        hasUnsavedChanges: true,
       });
 
     case actionTypes.CHANGE_COURSE_CATEGORY:
       return Object.assign({}, state, {
         category: action.category,
+        hasUnsavedChanges: true,
       });
 
     default:
