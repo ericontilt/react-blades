@@ -13,6 +13,7 @@ export default function courseReducer(state = {}, action) {
     case actionTypes.EDIT_COURSE:
       return Object.assign({}, {
         isNew: false,
+        hasUnsavedChanges: false,
       }, action.course);
 
     case actionTypes.CHANGE_COURSE_TITLE:
