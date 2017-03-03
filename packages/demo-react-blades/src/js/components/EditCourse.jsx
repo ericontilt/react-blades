@@ -63,7 +63,7 @@ class EditCourse extends React.Component {
       id: 'save',
       title: 'Save',
       iconClass: 'fa fa-save',
-      isEnabled: course.title.length > 0,
+      isEnabled: course.title.length > 0 && course.hasUnsavedChanges,
       onClick: () => {
         actions.saveCourse(course);
       },
