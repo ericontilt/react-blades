@@ -62,8 +62,10 @@ export default class Blade extends React.Component {
             {this.renderActions()}
           </ul>
         </div>
-        <div className="Blade__content" style={bladeStyle}>
-          {this.props.children}
+        <div className="Blade__content">
+          <div className="Blade__contentContainer" style={bladeStyle}>
+            {this.props.children}
+          </div>
         </div>
       </div>
     );

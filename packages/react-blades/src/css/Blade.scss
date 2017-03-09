@@ -56,4 +56,10 @@ $blade-header-z-index: 1;
     bottom: 0;
     z-index: $blade-content-z-index;
   }
+
+  .Blade__contentContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }

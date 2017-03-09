@@ -58,8 +58,8 @@ describe('BladeManager', () => {
       manager.add({ id: 'visible2', isVisible: true, width: 200 });
     });
 
-    it('throws if the given ID does not exist', () => {
-      expect(() => manager.remove('nonexistent')).toThrowError(/not found/i);
+    it('will not throw if the given ID does not exist', () => {
+      expect(() => manager.remove('nonexistent')).not.toThrow();
     });
 
     it('removes the blade from the collection', () => {

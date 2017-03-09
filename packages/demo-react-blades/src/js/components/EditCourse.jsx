@@ -19,22 +19,6 @@ class EditCourse extends React.Component {
     this.handleCourseTitleChange = this.handleCourseTitleChange.bind(this);
     this.handleCourseLengthChange = this.handleCourseLengthChange.bind(this);
     this.handleCourseCategoryChange = this.handleCourseCategoryChange.bind(this);
-    this.onRemoveBlade = this.onRemoveBlade.bind(this);
-  }
-
-  componentDidMount() {
-    this.unsubscribeBeforeRemove = this.props.blades.on('beforeRemove', this.onRemoveBlade);
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeBeforeRemove();
-  }
-
-  onRemoveBlade(e) {
-    const { id, course } = this.props;
-    if (e && e.id === id && course.hasUnsavedChanges) {
-      e.cancel();
-    }
   }
 
   handleCourseTitleChange(e) {
