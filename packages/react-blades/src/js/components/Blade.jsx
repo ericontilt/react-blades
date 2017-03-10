@@ -9,6 +9,7 @@ const propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  className: PropTypes.string,
   scroll: PropTypes.oneOf(['x', 'y', 'xy', 'hidden']),
 };
 
@@ -17,6 +18,7 @@ const defaultProps = {
   actions: [],
   children: [],
   scroll: 'y',
+  className: '',
 };
 
 const getScrollStyle = (scroll) => {
@@ -53,7 +55,7 @@ export default class Blade extends React.Component {
     const bladeStyle = Object.assign({}, getScrollStyle(this.props.scroll));
 
     return (
-      <div className="Blade" style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <div className={`Blade ${this.props.className}`} style={{ position: 'relative', width: '100%', height: '100%' }}>
         <header className="Blade__header">
           <h1>{this.props.title}</h1>
         </header>
