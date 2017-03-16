@@ -1,11 +1,11 @@
 {
   "name": "react-blades",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Horizontal stacking window panels.",
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && npm run build:js && npm run build:css && npm run build:components",
-    "build:css": "node-sass src/css/styles.scss dist/css/_blades.css",
+    "build:css": "node-sass src/css/styles.scss dist/css/Blades.css",
     "build:js": "babel src/js -d dist/ --ignore src/js/components",
     "build:components": "webpack",
     "clean": "rimraf dist",
