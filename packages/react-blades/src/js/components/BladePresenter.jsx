@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react';
 import BladeContainer from './BladeContainer';
 
 const contextTypes = {
-  blades: PropTypes.object.isRequired,
+  bladeManager: PropTypes.object.isRequired,
 };
 
-const BladePresenter = (_, { blades }) => (
+const BladePresenter = (_, { bladeManager }) => (
   <div className="BladePresenter">
-    {blades.getVisible().map((blade, i) => (
+    {bladeManager.getVisible().map((blade, i) => (
       <BladeContainer
-        blades={blades}
+        bladeManager={bladeManager}
         index={i}
         key={blade.id}
         {...blade}

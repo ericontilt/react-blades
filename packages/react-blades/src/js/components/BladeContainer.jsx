@@ -3,7 +3,7 @@ import cx from 'classnames';
 import attachClickHandler from '../utils/attachClickHandler';
 
 const propTypes = {
-  blades: PropTypes.object.isRequired,
+  bladeManager: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   component: PropTypes.shape({
@@ -18,6 +18,7 @@ const propTypes = {
 const defaultProps = {
   isActive: false,
   isVisible: true,
+  hidesBlade: false,
 };
 
 const defaultZIndex = 1;
@@ -25,9 +26,9 @@ const defaultZIndex = 1;
 export default class BladeContainer extends React.Component {
   componentDidMount() {
     this.bladeClickListener = attachClickHandler(this.blade,
-      () => this.props.blades.activate(this.props.id),
+      () => this.props.bladeManager.activate(this.props.id),
     );
-    this.props.blades.activate(this.props.id);
+    this.props.bladeManager.activate(this.props.id);
     window.scrollTo(this.props.left, 0);
   }
 
@@ -46,16 +47,16 @@ export default class BladeContainer extends React.Component {
     }
 
     const bladeClasses = {
-      Blade__container: true,
+      BladeContainer: true,
       active: this.props.isActive,
     };
 
     const child = React.createElement(
-      this.props.component.type,
-      Object.assign({}, {
-        blades: this.props.blades,
-        id: this.props.id,
-      }, this.props.component.props));
+      this.props.component.type, {
+        bladeManager: this.props.bladeManager,
+        bladeId: this.props.id,
+        ...this.props.component.props,
+      });
 
     return (
       <section ref={(c) => { this.blade = c; }} className={cx(bladeClasses)} style={bladeStyle}>

@@ -13,7 +13,7 @@ const defaultProps = {
   tooltip: null,
 };
 
-const BladeActionButton = ({
+const BladeToolbarButton = ({
   id,
   title,
   onClick,
@@ -35,22 +35,22 @@ const BladeActionButton = ({
   }
 
   return (
-    <li className="BladeActionButton">
+    <li className="BladeToolbarButton">
       <button
         className={cx({
-          BladeActionButton__button: true,
-        }, modifiersForButton.map(mod => `BladeActionButton__button--${mod}`))}
+          BladeToolbarButton__button: true,
+        }, modifiersForButton.map(mod => `BladeToolbarButton__button--${mod}`))}
         onClick={clickHandler}
         title={tooltip}
       >
         <i className={iconClass} />
-        <div className="BladeActionButton_title">{title}</div>
+        <div className="BladeToolbarButton_title">{title}</div>
       </button>
     </li>
   );
 };
 
-BladeActionButton.propTypes = propTypes;
-BladeActionButton.defaultProps = defaultProps;
+BladeToolbarButton.propTypes = propTypes;
+BladeToolbarButton.defaultProps = defaultProps;
 
-export default BladeActionButton;
+export default BladeToolbarButton;

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import BladeManager from './BladeManager';
 
 const propTypes = {
-  blades: PropTypes.instanceOf(BladeManager).isRequired,
+  bladeManager: PropTypes.instanceOf(BladeManager).isRequired,
   children: PropTypes.any,
 };
 const defaultProps = {
@@ -10,18 +10,18 @@ const defaultProps = {
 };
 
 const childContextTypes = {
-  blades: PropTypes.object,
+  bladeManager: PropTypes.object,
 };
 
 export default class BladeProvider extends React.Component {
   getChildContext() {
     return {
-      blades: this.props.blades,
+      bladeManager: this.props.bladeManager,
     };
   }
 
   componentWillMount() {
-    this.unsubscribeListener = this.props.blades.on('render', () => {
+    this.unsubscribeListener = this.props.bladeManager.on('render', () => {
       this.forceUpdate();
     });
   }
