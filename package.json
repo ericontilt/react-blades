@@ -1,7 +1,7 @@
 {
   "name": "react-blades",
   "version": "0.0.1",
-  "description": "Horizontal stacking window panels.",
+  "description": "Stacking window panels.",
   "main": "index.js",
   "scripts": {
     "build": "lerna run build",
@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/ericberagg/react-blades#readme",
   "devDependencies": {
-    "lerna": "2.0.0-beta.36"
+    "lerna": "2.0.0-beta.38"
   }
 }
