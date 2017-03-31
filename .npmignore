@@ -1,3 +1,13 @@
 /demo
 /test
 /typings
+yarn.lock
+typings.json
+karma.conf.js
+webpack.config.js
+.babelrc
+.csscomb.json
+.editorconfig
+.eslintignore
+.eslintrc
+jsconfig.json
