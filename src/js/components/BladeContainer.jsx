@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 import attachClickHandler from '../utils/attachClickHandler';
+import { isNumber } from '../utils/fn';
 
 const propTypes = {
   bladeManager: PropTypes.object.isRequired,
@@ -10,7 +11,10 @@ const propTypes = {
     type: PropTypes.func.isRequired,
     props: PropTypes.object,
   }).isRequired,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
   isActive: PropTypes.bool,
   left: PropTypes.number.isRequired,
   isVisible: PropTypes.bool,
@@ -18,7 +22,6 @@ const propTypes = {
 const defaultProps = {
   isActive: false,
   isVisible: true,
-  hidesBlade: false,
 };
 
 const defaultZIndex = 1;
@@ -40,8 +43,13 @@ export default class BladeContainer extends React.Component {
     const bladeStyle = {
       left: this.props.left,
       zIndex: defaultZIndex + this.props.index,
-      width: this.props.width,
     };
+    if (isNumber(this.props.width)) {
+      bladeStyle.width = this.props.width;
+    } else {
+      // handles width = 'auto' in case of vertical orientation
+      bladeStyle.right = 0;
+    }
     if (!this.props.isVisible) {
       bladeStyle.display = 'none';
     }

@@ -1,18 +1,22 @@
 /* eslint-disable no-underscore-dangle */
 import EventEmitter from '../utils/EventEmitter';
+import { isNumber } from '../utils/fn';
 
 const defaultBladeProps = {
   isVisible: true,
   isActive: true,
   width: 300,
   depth: 0,
-  hidesBlade: false,
 };
 
 export default class BladeManager extends EventEmitter {
-  constructor() {
+  constructor(options) {
     super();
     this.blades = [];
+    this.bladePropsOverrides = {
+      depth: options.orientation === 'vertical' ? 1 : 0,
+      width: 'auto',
+    };
   }
 
   add(blade) {
@@ -21,6 +25,9 @@ export default class BladeManager extends EventEmitter {
     }
     if (this._findById(blade.id)) {
       throw new Error(`Blade with ID=${blade.id} already exists.`);
+    }
+    if (blade.width && !isNumber(blade.width)) {
+      throw new Error('Blade width must be a numerical value');
     }
     this._addToCollection(blade);
     this._recalculateDimensions();
@@ -64,7 +71,7 @@ export default class BladeManager extends EventEmitter {
   }
 
   _addToCollection(blade) {
-    this.blades = this.blades.concat(Object.assign({}, defaultBladeProps, blade, {
+    this.blades = this.blades.concat(Object.assign({}, defaultBladeProps, blade, this.bladePropsOverrides, {
       index: Object.keys(this.blades).length,
     }));
   }
