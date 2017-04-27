@@ -1,0 +1,189 @@
+h1, h2, h3, h4, h5, h6 {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+#app {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+ul.course-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.course-list-item {
+  height: 80px;
+  padding: 10px;
+  border-bottom: solid 1px #94A187;
+}
+
+.course-list-item:hover {
+  background-color: #94A187;
+}
+
+.course-list-item .title {
+  font-size: 1.3em;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-list-item .length {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-list-item .category {
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blink {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {  
+  50% { color: red; }
+}
+
+.BladePresenter {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+.BladePresenter * {
+  box-sizing: border-box;
+}
+
+.BladeContainer {
+  border-right: 1px solid #06070E;
+  font-size: 14px;
+  background-color: #C5AFA0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  white-space: normal;
+}
+
+.Blade {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.Blade .BladeHeader {
+  position: relative;
+  color: white;
+  z-index: 1;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  background-color: #06070E;
+}
+
+.Blade .BladeHeader .BladeHeader__title {
+  padding: 0 10px;
+  margin: 0;
+  vertical-align: middle;
+  color: white;
+  -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Blade .BladeToolbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: none;
+  word-wrap: break-word;
+  background-color: #29524A;
+  height: 50px;
+}
+
+.Blade .BladeContent {
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  left: 0;
+  top: 90px;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.Blade .BladeContent__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.BladeToolbarButton {
+  float: left;
+}
+
+.BladeToolbarButton__button {
+  display: block;
+  background-color: #29524A;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  line-height: 12px;
+  height: 50px;
+  width: 65px;
+  border: 0;
+}
+
+.BladeToolbarButton__button [class*='fa-'] {
+  font-size: 16px;
+  padding-bottom: 1px;
+  margin-top: 2px;
+}
+
+.BladeToolbarButton__button:focus {
+  outline: 0;
+}
+
+.BladeToolbarButton__button:hover {
+  background-color: #326359;
+}
+
+.BladeToolbarButton__button:active, .BladeToolbarButton__button.active {
+  background-color: #3A7469;
+}
+
+.BladeToolbarButton__button--disabled {
+  background-color: #29524A;
+  color: #AAAAAA;
+}
+
+.BladeToolbarButton__button--toggled {
+  -webkit-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, .75);
+     -moz-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, .75);
+          box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, .75);
+}
