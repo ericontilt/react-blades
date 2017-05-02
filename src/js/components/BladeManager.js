@@ -12,9 +12,12 @@ const defaultBladeProps = {
 export default class BladeManager extends EventEmitter {
   constructor(options) {
     super();
+    this.options = {
+      ...options,
+    };
     this.blades = [];
     this.bladePropsOverrides = {
-      depth: options.orientation === 'vertical' ? 1 : 0,
+      depth: this.options.orientation === 'vertical' ? 1 : 0,
       width: 'auto',
     };
   }
