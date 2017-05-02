@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ericberagg/react-blades.git"
+    "url": "https://github.com/ericontilt/react-blades.git"
   },
   "keywords": [
     "react",
@@ -32,9 +32,9 @@
   "author": "Eric Beragg",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ericberagg/react-blades/issues"
+    "url": "https://github.com/ericontilt/react-blades/issues"
   },
-  "homepage": "https://github.com/ericberagg/react-blades#readme",
+  "homepage": "https://github.com/ericontilt/react-blades#readme",
   "devDependencies": {
     "airbnb-js-shims": "^1.0.1",
     "babel-cli": "^6.24.1",
