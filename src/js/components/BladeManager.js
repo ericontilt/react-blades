@@ -16,10 +16,6 @@ export default class BladeManager extends EventEmitter {
       ...options,
     };
     this.blades = [];
-    this.bladePropsOverrides = {
-      depth: this.options.orientation === 'vertical' ? 1 : 0,
-      width: 'auto',
-    };
   }
 
   add(blade) {
@@ -74,9 +70,14 @@ export default class BladeManager extends EventEmitter {
   }
 
   _addToCollection(blade) {
-    this.blades = this.blades.concat(Object.assign({}, defaultBladeProps, blade, this.bladePropsOverrides, {
+    const tmpBlade = Object.assign({}, defaultBladeProps, blade, {
       index: Object.keys(this.blades).length,
-    }));
+    });
+    if (this.options.orientation === 'vertical') {
+      tmpBlade.depth = 1;
+      tmpBlade.width = 'auto';
+    }
+    this.blades = this.blades.concat(tmpBlade);
   }
 
   _removeFromCollection(id) {
