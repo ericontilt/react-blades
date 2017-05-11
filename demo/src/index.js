@@ -12,9 +12,9 @@ import CourseList from './components/CourseList';
 const store = configureStore();
 store.dispatch(loadCourses());
 
-const bladeManager = new BladeManager({
+const bladeManager = new BladeManager(/*{
   orientation: 'vertical',
-});
+}*/);
 
 bladeManager.add({
   id: 'item-overview',

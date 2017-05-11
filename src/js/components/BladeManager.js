@@ -74,7 +74,7 @@ export default class BladeManager extends EventEmitter {
       index: Object.keys(this.blades).length,
     });
     if (this.options.orientation === 'vertical') {
-      tmpBlade.depth = 1;
+      tmpBlade.depth = 0;
       tmpBlade.width = 'auto';
     }
     this.blades = this.blades.concat(tmpBlade);
@@ -104,7 +104,7 @@ export default class BladeManager extends EventEmitter {
     const visibleBlades = this._getVisibleBlades();
     for (let i = 0; i < visibleBlades.length; i += 1) {
       visibleBlades[i].left = left;
-      left += visibleBlades[i].width;
+      left += visibleBlades[i].width === 'auto' ? 0 : visibleBlades[i].width;
     }
   }
 }
