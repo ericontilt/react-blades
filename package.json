@@ -66,6 +66,7 @@
     "classnames": "^2.2.5"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.10",
     "react": ">=0.14",
     "react-dom": ">=0.14"
   }
