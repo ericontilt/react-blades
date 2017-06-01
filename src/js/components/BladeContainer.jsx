@@ -17,7 +17,7 @@ const propTypes = {
     PropTypes.string,
   ]).isRequired,
   isActive: PropTypes.bool,
-  left: PropTypes.number.isRequired,
+  // left: PropTypes.number.isRequired,
   isVisible: PropTypes.bool,
 };
 const defaultProps = {
@@ -33,7 +33,7 @@ export default class BladeContainer extends React.Component {
       () => this.props.bladeManager.activate(this.props.id),
     );
     this.props.bladeManager.activate(this.props.id);
-    window.scrollTo(this.props.left, 0);
+    // window.scrollTo(this.props.left, 0);
   }
 
   componentWillUnmount() {
@@ -42,14 +42,15 @@ export default class BladeContainer extends React.Component {
 
   render() {
     const bladeStyle = {
-      left: this.props.left,
+      BladeContainer: true,
+      // left: this.props.left,
       zIndex: defaultZIndex + this.props.index,
     };
     if (isNumber(this.props.width)) {
       bladeStyle.width = this.props.width;
     } else {
       // handles width = 'auto' in case of vertical orientation
-      bladeStyle.right = 0;
+      bladeStyle.width = '100%';
     }
     if (!this.props.isVisible) {
       bladeStyle.display = 'none';

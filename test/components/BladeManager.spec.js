@@ -15,7 +15,9 @@ describe('BladeManager', () => {
   });
 
   describe('#add', () => {
-    it('throws if blade id is missing', () => {
+    it('throws if blade (with id) is missing', () => {
+      expect(() => manager.add(null)).toThrowError(/id is mandatory/i);
+      expect(() => manager.add(undefined)).toThrowError(/id is mandatory/i);
       expect(() => manager.add({})).toThrowError(/id is mandatory/i);
     });
 
@@ -24,22 +26,37 @@ describe('BladeManager', () => {
       expect(() => manager.add({ id: 'test' })).toThrowError(/already exists/i);
     });
 
-    it('adds to blade the collection', () => {
-      manager.add({ id: 'visible', isVisible: true });
-      expect(manager.getVisible().length).toBe(1);
+    it('throws if blade width is not a number', () => {
+      expect(() => manager.add({ id: 'test', width: 'abc' })).toThrowError(/numerical value/i);
     });
 
-    it('recalculates dimensions and offsets', () => {
-      manager.add({ id: 'visible1', isVisible: true, width: 100 });
-      manager.add({ id: 'visible2', isVisible: true, width: 200 });
-      const blades = manager.getVisible();
-      expect(blades[0].width).toBe(100);
-      expect(blades[0].left).toBe(0);
-      expect(blades[1].width).toBe(200);
-      expect(blades[1].left).toBe(100);
+    it('adds to blade the collection with default props', () => {
+      manager.add({ id: 'new' });
+      const visibleBlades = manager.getVisible();
+      expect(visibleBlades.length).toBe(1);
+      expect(visibleBlades[0].width).toBe(300);
+      expect(visibleBlades[0].depth).toBe(0);
+      expect(visibleBlades[0].isActive).toBeTruthy();
+      expect(visibleBlades[0].isVisible).toBeTruthy();
     });
 
-    it('activates most recently added blade', () => {
+    it('adds to blade the collection with override props', () => {
+      const blade = {
+        id: 'new',
+        width: 500,
+        depth: 3,
+      };
+      manager.add(blade);
+
+      const visibleBlades = manager.getVisible();
+      expect(visibleBlades.length).toBe(1);
+      expect(visibleBlades[0].width).toBe(500);
+      expect(visibleBlades[0].depth).toBe(3);
+      expect(visibleBlades[0].isActive).toBeTruthy();
+      expect(visibleBlades[0].isVisible).toBeTruthy();
+    });
+
+    it('activates most recently added blade, deactivating other blades', () => {
       manager.add({ id: 'visible1', isVisible: true, isActive: true });
       manager.add({ id: 'visible2', isVisible: true, isActive: true });
       const blades = manager.getVisible();

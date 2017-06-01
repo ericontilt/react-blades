@@ -42,14 +42,6 @@ describe('BladeToolbarButton', () => {
       });
     });
 
-    describe('props.toggled === true', () => {
-      it('renders .BladeToolbarButton__button--toggled class', () => {
-        const action = { id: 'btn', isToggled: true };
-        const wrapper = shallow(<BladeToolbarButton {...action} />);
-        expect(wrapper.find('.BladeToolbarButton__button--toggled').length).toBe(1);
-      });
-    });
-
     describe('props.onClick with callback handler', () => {
       it('attaches click handler to button', () => {
         const onClickSpy = jasmine.createSpy();
