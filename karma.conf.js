@@ -1,6 +1,5 @@
 /* eslint no-param-reassign:0, import/no-extraneous-dependencies:0 */
 const path = require('path');
-// const webpack = require('webpack');
 
 module.exports = (config) => {
   config.set({
@@ -9,24 +8,17 @@ module.exports = (config) => {
     frameworks: ['jasmine'],
 
     files: [
-      'test/components/*',
+      'test/components/**/*',
     ],
 
     webpack: {
-      // externals: {
-      //   sinon: true,
-      // },
-      plugins: [
-        // https://github.com/cheeriojs/cheerio/issues/836
-        // new webpack.NormalModuleReplacementPlugin(/^\.\/package$/, (result) => {
-        //   if (/cheerio/.test(result.context)) {
-        //     result.request = './package.json';
-        //   }
-        // }),
-      ],
       devtool: 'inline-source-map',
       module: {
-        loaders: [{
+        rules: [{
+          test: /\.jsx?$/,
+          enforce: 'pre',
+          loader: 'source-map-loader'
+        }, {
           test: /\.jsx?$/,
           loader: 'babel-loader',
           include: [
@@ -34,20 +26,27 @@ module.exports = (config) => {
             path.join(__dirname, 'test'),
             require.resolve('airbnb-js-shims'),
           ],
+          exclude: [
+            path.resolve(__dirname, 'node_modules')
+          ],
           query: {
             presets: ['airbnb'],
           },
         }, {
-          test: /\.json$/,
-          loader: 'json-loader',
-        }, {
           // Inject the Airbnb shims into the bundle
-          test: /test\/_helpers/, loader: 'imports?shims=airbnb-js-shims',
+          test: /test\/_helpers/, loader: 'imports-loader?shims=airbnb-js-shims',
         }],
       },
       resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['.js', '.jsx'],
       },
+      externals: {
+        'cheerio': 'window',
+        'react/addons': 'react',
+        'react-test-renderer/shallow': 'react',
+        'react/lib/ExecutionEnvironment': 'react',
+        'react/lib/ReactContext': 'react'
+      }
     },
 
     webpackMiddleware: {

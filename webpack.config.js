@@ -20,7 +20,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: './dist/components/',
+    path: path.resolve(__dirname, 'dist/components'),
     libraryTarget: 'commonjs2',
   },
   externals(context, request, callback) {
@@ -32,7 +32,7 @@ module.exports = {
     return callback(null, true);
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?/,
       loader: 'babel-loader',
       include: path.join(__dirname, 'src/js'),
@@ -42,6 +42,6 @@ module.exports = {
     }],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
 };
