@@ -57,7 +57,7 @@ module.exports = (config) => {
     },
 
     preprocessors: {
-      'test/**/*': ['webpack'],
+      'test/**/*': ['webpack', 'sourcemap'],
     },
 
     reporters: ['spec'],

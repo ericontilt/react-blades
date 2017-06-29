@@ -8,7 +8,7 @@ describe('BladePresenter', () => {
       const wrapper = shallow(<BladePresenter />, {
         context: {
           bladeManager: {
-            getVisible: () => ([]),
+            getAll: () => ([]),
           },
         },
       });
@@ -20,7 +20,7 @@ describe('BladePresenter', () => {
         const wrapper = shallow(<BladePresenter />, {
           context: {
             bladeManager: {
-              getVisible: () => ([{
+              getAll: () => ([{
                 id: 'A',
                 component: { type: () => { } },
                 width: 100,

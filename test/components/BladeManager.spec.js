@@ -30,7 +30,7 @@ describe('BladeManager', () => {
       expect(() => manager.add({ id: 'test', width: 'abc' })).toThrowError(/numerical value/i);
     });
 
-    it('adds to blade the collection with default props', () => {
+    it('adds the blade to the collection with default props', () => {
       manager.add({ id: 'new' });
       const visibleBlades = manager.getVisible();
       expect(visibleBlades.length).toBe(1);
@@ -66,6 +66,35 @@ describe('BladeManager', () => {
 
     it('triggers the render event after adding the blade', () => {
       manager.add({ id: 'test' });
+    });
+
+    describe('when adding blade with depth', () => {
+      it('updates isVisible correctly for blades with depth', () => {
+        manager.add({
+          id: '1',
+          width: 100,
+        });
+        manager.add({
+          id: '2',
+          width: 100,
+        });
+        manager.add({
+          id: '3',
+          width: 100,
+          depth: 1,
+        });
+        manager.add({
+          id: '4',
+          width: 100,
+        });
+        manager.add({
+          id: '5',
+          width: 100,
+          depth: 1,
+        });
+        expect(manager.getVisible().length).toEqual(1);
+        expect(manager.getVisible()[0].id).toEqual('5');
+      });
     });
   });
 
@@ -124,14 +153,6 @@ describe('BladeManager', () => {
       expect(visible.length).toBe(2);
       expect(visible[0].id).toBe('visible1');
       expect(visible[1].id).toBe('visible2');
-    });
-  });
-
-  describe('#getVisible', () => {
-    it('returns visible blades only', () => {
-      manager.add({ id: 'visible', isVisible: true });
-      manager.add({ id: 'invisible', isVisible: false });
-      expect(manager.getVisible().length).toBe(1);
     });
   });
 });

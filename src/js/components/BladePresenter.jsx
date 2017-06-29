@@ -8,7 +8,7 @@ const contextTypes = {
 
 const BladePresenter = (_, { bladeManager }) => (
   <div className="BladePresenter">
-    {bladeManager.getVisible().map((blade, i) => (
+    {bladeManager.getAll().map((blade, i) => (
       <BladeContainer
         bladeManager={bladeManager}
         index={i}

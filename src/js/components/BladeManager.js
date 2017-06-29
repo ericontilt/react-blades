@@ -29,14 +29,20 @@ export default class BladeManager extends EventEmitter {
       throw new Error('Blade width must be a numerical value');
     }
     this._addToCollection(blade);
+    this._resetBladeVisibility();
     this._activateById(blade.id);
     this.trigger('render');
   }
 
+  /**
+   * Removes all blades following and including the provided ID.
+   * @param {*string} id The Blade ID.
+   */
   remove(id) {
     if (!this._findById(id)) return;
     this._removeFromCollection(id);
     if (this.blades.length > 0) {
+      this._resetBladeVisibility();
       this._activateById(this._last().id);
     }
     this.trigger('render');
@@ -54,10 +60,15 @@ export default class BladeManager extends EventEmitter {
     } else {
       this.blades = this.blades.slice(0, this.blades.length - 1);
     }
+    this._resetBladeVisibility();
+  }
+
+  getAll() {
+    return this.blades.slice(0);
   }
 
   getVisible() {
-    return this._getVisibleBlades();
+    return this.blades.filter(x => x.isVisible);
   }
 
   _last() {
@@ -89,12 +100,13 @@ export default class BladeManager extends EventEmitter {
     }));
   }
 
-  _getVisibleBlades() {
-    const visible = this.blades.filter(b => b.isVisible);
-    const bladeWithDepth = [].concat(visible).reverse().find(b => b.depth > 0);
+  _resetBladeVisibility() {
+    const bladeWithDepth = [].concat(this.blades).reverse().find(b => b.depth > 0);
     if (bladeWithDepth) {
-      return visible.slice(visible.indexOf(bladeWithDepth), visible.length);
+      this.blades.forEach(b => b.isVisible = false); //eslint-disable-line
+      this.blades.slice(this.blades.indexOf(bladeWithDepth)).forEach(b => b.isVisible = true); //eslint-disable-line
+    } else {
+      this.blades.forEach(b => b.isVisible = true); //eslint-disable-line
     }
-    return visible;
   }
 }
