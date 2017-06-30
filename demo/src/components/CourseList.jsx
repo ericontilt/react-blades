@@ -57,7 +57,6 @@ class CourseList extends React.Component {
     actions.initNewCourse();
     bladeManager.add({
       id: 'course-details',
-      isVisible: true,
       width: 500,
       component: {
         type: CreateCourse,
