@@ -1,6 +1,6 @@
 {
   "name": "react-blades",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Horizontal stacking window panels.",
   "main": "index.js",
   "scripts": {
