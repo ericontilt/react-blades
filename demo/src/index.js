@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 
-import { BladeManager, BladeProvider, BladePresenter } from '../../index';
+import { BladeManager, BladeProvider, BladePresenter, getBladeTheme } from '../../index';
 
 import './index.css';
 import configureStore from './store/configureStore';
@@ -11,6 +11,19 @@ import CourseList from './components/CourseList';
 
 const store = configureStore();
 store.dispatch(loadCourses());
+
+const bladeTheme = getBladeTheme({
+  bladeHeader: {
+    titleBackgroundColor: 'blue',
+  },
+  bladeToolbar: {
+    backgroundColor: 'lightblue',
+  },
+  bladeToolbarButton: {
+    iconColor: 'red',
+    textColor: 'pink',
+  },
+});
 
 const bladeManager = new BladeManager({
   orientation: 'horizontal',
@@ -25,7 +38,7 @@ bladeManager.add({
 
 ReactDOM.render(
   <ReduxProvider store={store}>
-    <BladeProvider bladeManager={bladeManager}>
+    <BladeProvider bladeManager={bladeManager} bladeTheme={bladeTheme}>
       <BladePresenter />
     </BladeProvider>
   </ReduxProvider>,

@@ -1,16 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import getContext from '../stubs/contextStub';
 import BladePresenter from '../../src/js/components/BladePresenter';
 
 describe('BladePresenter', () => {
   describe('#render', () => {
     it('is .BladePresenter', () => {
       const wrapper = shallow(<BladePresenter />, {
-        context: {
-          bladeManager: {
-            getAll: () => ([]),
-          },
-        },
+        context: getContext(),
       });
       expect(wrapper.is('.BladePresenter')).toEqual(true);
     });
@@ -18,7 +15,7 @@ describe('BladePresenter', () => {
     describe('#getVisible', () => {
       it('renders a BladeContainer for each blade', () => {
         const wrapper = shallow(<BladePresenter />, {
-          context: {
+          context: getContext({
             bladeManager: {
               getAll: () => ([{
                 id: 'A',
@@ -32,7 +29,7 @@ describe('BladePresenter', () => {
                 left: 100,
               }]),
             },
-          },
+          }),
         });
         expect(wrapper.find('BladeContainer').length).toBe(2);
       });

@@ -17,8 +17,8 @@ const propTypes = {
     PropTypes.string,
   ]).isRequired,
   isActive: PropTypes.bool,
-  // left: PropTypes.number.isRequired,
   isVisible: PropTypes.bool,
+  bladeTheme: PropTypes.object.isRequired,
 };
 const defaultProps = {
   isActive: false,
@@ -26,6 +26,14 @@ const defaultProps = {
 };
 
 const defaultZIndex = 1;
+
+const styles = {
+  root: {
+    height: '100%',
+    float: 'left',
+    whiteSpace: 'normal',
+  },
+};
 
 export default class BladeContainer extends React.Component {
   componentDidMount() {
@@ -41,19 +49,22 @@ export default class BladeContainer extends React.Component {
   }
 
   render() {
-    const bladeStyle = {
-      BladeContainer: true,
-      // left: this.props.left,
+    const { bladeTheme } = this.props;
+    const bladeContainerStyle = {
+      ...styles.root,
+      backgroundColor: bladeTheme.bladeContainer.backgroundColor,
+      borderRight: `1px solid ${bladeTheme.bladeContainer.borderColor}`,
+      fontSize: bladeTheme.bladeContainer.fontSize,
       zIndex: defaultZIndex + this.props.index,
     };
     if (isNumber(this.props.width)) {
-      bladeStyle.width = this.props.width;
+      bladeContainerStyle.width = this.props.width;
     } else {
       // handles width = 'auto' in case of vertical orientation
-      bladeStyle.width = '100%';
+      bladeContainerStyle.width = '100%';
     }
     if (!this.props.isVisible) {
-      bladeStyle.display = 'none';
+      bladeContainerStyle.display = 'none';
     }
 
     const bladeClasses = {
@@ -69,7 +80,7 @@ export default class BladeContainer extends React.Component {
       });
 
     return (
-      <section ref={(c) => { this.blade = c; }} className={cx(bladeClasses)} style={bladeStyle}>
+      <section ref={(c) => { this.blade = c; }} className={cx(bladeClasses)} style={bladeContainerStyle}>
         {child}
       </section>
     );

@@ -14,8 +14,16 @@ const defaultProps = {
   className: '',
 };
 
+const styles = {
+  root: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+};
+
 const Blade = ({ children, className }) => (
-  <div className={`Blade ${className}`}>
+  <div className={`Blade ${className}`} style={styles.root}>
     {children}
   </div>
 );

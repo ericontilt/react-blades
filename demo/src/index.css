@@ -28,7 +28,7 @@ ul.course-list {
 }
 
 .course-list-item {
-  height: 80px;
+  height: 55px;
   padding: 10px;
   border-bottom: solid 1px #94A187;
 }
@@ -68,99 +68,8 @@ ul.course-list {
   }
 }
 
-.BladePresenter {
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: "Trebuchet MS", Helvetica, sans-serif; }
-  .BladePresenter * {
-    box-sizing: border-box; }
-
-.BladeContainer {
-  height: 100%;
-  border-right: 1px solid #06070E;
-  font-size: 14px;
-  background-color: #C5AFA0;
-  float: left;
-  white-space: normal; }
-
-.Blade {
-  position: relative;
-  width: 100%;
-  height: 100%; }
-
-.BladeHeader {
-  position: relative;
-  color: white;
-  z-index: 1;
-  overflow: hidden;
-  background-color: #06070E; }
-  .BladeHeader .BladeHeader__title {
-    padding: 0 10px;
-    margin: 0;
-    vertical-align: middle;
-    background-color: #06070E;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap; }
-
-.BladeToolbar {
-  background-color: #29524A; }
-  .BladeToolbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: none;
-    word-wrap: break-word; }
-
-.BladeToolbarButton {
-  float: left; }
-
-.BladeToolbarButton__button {
-  display: block;
-  background-color: #29524A;
-  color: white;
-  font-size: 11px;
-  text-align: center;
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
-  line-height: 12px;
-  border: 0; }
-  .BladeToolbarButton__button [class*="fa-"] {
-    font-size: 16px;
-    padding-bottom: 1px;
-    margin-top: 2px; }
-  .BladeToolbarButton__button:focus {
-    outline: 0; }
-  .BladeToolbarButton__button:hover {
-    background-color: #326359; }
-  .BladeToolbarButton__button:active, .BladeToolbarButton__button.active {
-    background-color: #3a7469; }
-
-.BladeToolbarButton__button--disabled {
-  background-color: #29524A;
-  color: #aaaaaa; }
-
-.BladeToolbarButton__button--toggled {
-  -webkit-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75);
-  box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.75); }
-
-.BladeContent {
-  padding: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1; }
-
-.BladeContent__container {
-  position: relative;
-  width: 100%;
-  height: 100%; }
+.BladeToolbarButton__button [class*="fa-"] {
+  font-size: 16px;
+  padding-bottom: 1px;
+  margin-top: 2px;
+}

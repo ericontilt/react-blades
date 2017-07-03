@@ -6,6 +6,7 @@ var BladeHeader = require('./js/components/BladeHeader').default;
 var BladeToolbar = require('./js/components/BladeToolbar').default;
 var BladeToolbarButton = require('./js/components/BladeToolbarButton').default;
 var BladeContent = require('./js/components/BladeContent').default;
+var getBladeTheme = require('./js/styles/getBladeTheme').default;
 
 module.exports = {
   BladeManager: BladeManager,
@@ -16,4 +17,5 @@ module.exports = {
   BladeToolbar: BladeToolbar,
   BladeToolbarButton: BladeToolbarButton,
   BladeContent: BladeContent,
+  getBladeTheme: getBladeTheme,
 };
