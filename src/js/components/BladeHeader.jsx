@@ -19,8 +19,6 @@ const contextTypes = {
 const styles = {
   root: {
     position: 'relative',
-    zIndex: 1,
-    overflow: 'hidden',
   },
   title: {
     padding: '0 10px',
