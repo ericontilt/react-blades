@@ -10,6 +10,7 @@
   "rules": {
     "max-len": ["error", { "code": 120 }],
     "no-plusplus": 0,
+    "linebreak-style": ["error", "windows"],
 
     "react/no-find-dom-node": 1,
     "react/no-string-refs": 1

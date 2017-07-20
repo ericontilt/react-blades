@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {
+  List,
+  ListItem,
+} from 'material-ui/List';
 
 import { Blade, BladeHeader, BladeToolbar, BladeToolbarButton, BladeContent } from '../../../index';
 
-import CourseListItem from './CourseListItem';
 import CreateCourse from './CreateCourse';
 import EditCourse from './EditCourse';
 import * as courseActions from '../actions/courseActions';
@@ -30,37 +33,29 @@ class CourseList extends React.Component {
 
   handleCourseClick(course) {
     const { bladeManager, actions, bladeId } = this.props;
-    bladeManager.back(bladeId);
-    actions.editCourse(course);
-    bladeManager.add({
-      id: 'edit-course',
-      width: 500,
-      component: {
-        type: EditCourse,
-      },
+    bladeManager.back(bladeId, () => {
+      actions.editCourse(course);
+      bladeManager.add({
+        id: 'edit-course',
+        width: 500,
+        component: {
+          type: EditCourse,
+        },
+      });
     });
-  }
-
-  courseRow(course) {
-    return (
-      <CourseListItem
-        course={course}
-        key={course.id}
-        onCourseClick={this.handleCourseClick}
-      />
-    );
   }
 
   handleCreateClick() {
     const { bladeManager, actions, bladeId } = this.props;
-    bladeManager.back(bladeId);
-    actions.initNewCourse();
-    bladeManager.add({
-      id: 'course-details',
-      width: 500,
-      component: {
-        type: CreateCourse,
-      },
+    bladeManager.back(bladeId, () => {
+      actions.initNewCourse();
+      bladeManager.add({
+        id: 'course-details',
+        width: 500,
+        component: {
+          type: CreateCourse,
+        },
+      });
     });
   }
 
@@ -80,9 +75,16 @@ class CourseList extends React.Component {
         </BladeToolbar>
 
         <BladeContent>
-          <ul className="course-list">
-            {courses.map(c => this.courseRow(c))}
-          </ul>
+          <List>
+            {courses.map(course => (
+              <ListItem
+                key={course.title}
+                primaryText={course.title}
+                secondaryText={`${course.category}, Length: ${course.length}`}
+                onClick={() => this.handleCourseClick(course)}>
+              </ListItem>
+            ))}
+          </List>
         </BladeContent>
       </Blade>
     );

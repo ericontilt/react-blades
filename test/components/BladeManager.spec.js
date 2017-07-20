@@ -5,7 +5,6 @@ describe('BladeManager', () => {
 
   beforeEach(() => {
     manager = new BladeManager();
-    spyOn(manager, 'trigger');
   });
 
   describe('#constructor', () => {
@@ -124,6 +123,7 @@ describe('BladeManager', () => {
     });
 
     it('triggers a render', () => {
+      spyOn(manager, 'trigger');
       manager.remove('visible2');
       expect(manager.trigger).toHaveBeenCalledWith('render');
     });
@@ -161,6 +161,7 @@ describe('BladeManager', () => {
     });
 
     it('triggers a render', () => {
+      spyOn(manager, 'trigger');
       manager.back();
       expect(manager.trigger).toHaveBeenCalledWith('render');
     });
@@ -171,7 +172,7 @@ describe('BladeManager', () => {
       const spy = jest.fn();
       manager.add({ id: 'first' });
       manager.add({ id: 'second' });
-      const unsubscribe = manager.subscribeNavigationPrevented(spy);
+      const unsubscribe = manager.on('navigationPrevented', spy);
       const allowNavigation = manager.preventNavigation('second');
       manager.back('first');
       expect(spy.mock.calls.length).toBe(1);
@@ -194,11 +195,11 @@ describe('BladeManager', () => {
       const spy = jest.fn();
       manager.add({ id: 'first' });
       manager.add({ id: 'second' });
-      manager.subscribeNavigationPrevented(spy);
+      manager.on('navigationPrevented', spy);
       const allowNavigation = manager.preventNavigation('second');
       manager.back('first');
       expect(spy.mock.calls.length).toBe(1);
-      expect(spy.mock.calls[0][0]).toBe('second');
+      expect(spy.mock.calls[0][0].id).toBe('second');
       expect(manager.getVisible().length).toBe(2);
     });
 
@@ -206,11 +207,11 @@ describe('BladeManager', () => {
       const spy = jest.fn();
       manager.add({ id: 'first' });
       manager.add({ id: 'second' });
-      manager.subscribeNavigationPrevented(spy);
+      manager.on('navigationPrevented', spy);
       const allowNavigation = manager.preventNavigation('second');
       manager.remove('second');
       expect(spy.mock.calls.length).toBe(1);
-      expect(spy.mock.calls[0][0]).toBe('second');
+      expect(spy.mock.calls[0][0].id).toBe('second');
       expect(manager.getVisible().length).toBe(2);
     });
   });

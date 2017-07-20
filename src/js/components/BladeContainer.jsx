@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-// import attachClickHandler from '../utils/attachClickHandler';
+import attachClickHandler from '../utils/attachClickHandler';
 import { isNumber } from '../utils/fn';
 
 const propTypes = {
@@ -37,15 +37,15 @@ const styles = {
 
 export default class BladeContainer extends React.Component {
   componentDidMount() {
-    // this.bladeClickListener = attachClickHandler(this.blade,
-    //   () => this.props.bladeManager.activate(this.props.id),
-    // );
+    this.bladeClickListener = attachClickHandler(this.blade,
+      () => this.props.bladeManager.activate(this.props.id),
+    );
     // this.props.bladeManager.activate(this.props.id);
     // window.scrollTo(this.props.left, 0);
   }
 
   componentWillUnmount() {
-    // this.bladeClickListener.remove();
+    this.bladeClickListener.remove();
   }
 
   render() {

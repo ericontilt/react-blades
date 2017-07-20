@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import TextField from 'material-ui/TextField';
 
 import { Blade, BladeHeader, BladeToolbar, BladeToolbarButton, BladeContent } from '../../../index';
 import * as courseActions from '../actions/courseActions';
@@ -22,6 +23,24 @@ class CreateCourse extends React.Component {
     this.handleCourseCategoryChange = this.handleCourseCategoryChange.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
+
+    this.allowNavigation = () => { };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { bladeManager, bladeId, course } = this.props;
+    const nextCourse = nextProps.course;
+    if (nextCourse.hasUnsavedChanges !== course.hasUnsavedChanges) {
+      if (nextCourse.hasUnsavedChanges) {
+        this.allowNavigation = bladeManager.preventNavigation(bladeId);
+      } else {
+        this.allowNavigation();
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.allowNavigation();
   }
 
   handleCourseTitleChange(e) {
@@ -68,31 +87,21 @@ class CreateCourse extends React.Component {
         </BladeToolbar>
 
         <BladeContent>
-          <div>
-            <label htmlFor="input-course-title">Title:</label>
-            <input
-              type="text"
-              id="input-course-title"
+          <div style={{ padding: '0 10px' }}>
+            <TextField
+              floatingLabelText="Title"
               value={course.title}
               onChange={this.handleCourseTitleChange}
             />
-          </div>
 
-          <div>
-            <label htmlFor="input-course-length">Length:</label>
-            <input
-              type="text"
-              id="input-course-length"
+            <TextField
+              floatingLabelText="Length"
               value={course.length}
               onChange={this.handleCourseLengthChange}
             />
-          </div>
 
-          <div>
-            <label htmlFor="input-course-category">Category:</label>
-            <input
-              type="text"
-              id="input-course-category"
+            <TextField
+              floatingLabelText="Category"
               value={course.category}
               onChange={this.handleCourseCategoryChange}
             />

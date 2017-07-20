@@ -17,7 +17,6 @@ export default class BladeManager extends EventEmitter {
     };
     this.blades = [];
     this.bladesPreventingNavigation = [];
-    this.navigationPreventedHandlers = [];
   }
 
   add(blade) {
@@ -40,12 +39,13 @@ export default class BladeManager extends EventEmitter {
    * Removes all blades following and including the provided ID.
    * @param {*string} id The Blade ID.
    */
-  remove(id) {
+  remove(id, successCb) {
     if (!this._findById(id)) return;
     if (this._shouldPreventNavigation()) {
-      this._notifyNavigationPrevented(this.bladesPreventingNavigation[0],
-        () => this.remove(id),
-      );
+      this._notifyNavigationPrevented(() => {
+        this.remove(id);
+        if (successCb) successCb();
+      });
       return;
     }
     this._removeFromCollection(id);
@@ -54,14 +54,15 @@ export default class BladeManager extends EventEmitter {
       this._activateById(this._last().id);
     }
     this.trigger('render');
+    if (successCb) successCb();
   }
 
-  back(id) {
+  back(id, successCb) {
     if (this._shouldPreventNavigation()) {
-      const bladeIdToBeRemoved = this.bladesPreventingNavigation[0];
-      this._notifyNavigationPrevented(bladeIdToBeRemoved,
-        () => this.back(id),
-      );
+      this._notifyNavigationPrevented(() => {
+        this.back(id);
+        if (successCb) successCb();
+      });
       return;
     }
     if (id) {
@@ -73,18 +74,33 @@ export default class BladeManager extends EventEmitter {
     this._resetBladeVisibility();
     this._activateById(id);
     this.trigger('render');
+    if (successCb) successCb();
+  }
+
+  activate(id) {
+    if (!id) throw new Error('Parameter "id" must be defined.');
+    this._activateById(id);
+    this.trigger('render');
   }
 
   preventNavigation(id) {
+    if (!id) throw new Error('Parameter "id" must be defined.');
     if (this.bladesPreventingNavigation.indexOf(id) <= 0) {
       this.bladesPreventingNavigation.splice(0, 0, id);
     }
-    return () => this.bladesPreventingNavigation.splice(this.bladesPreventingNavigation.indexOf(id), 1);
+    return () => this.allowNavigation(id);
   }
 
-  subscribeNavigationPrevented(fn) {
-    this.navigationPreventedHandlers.push(fn);
-    return () => this.navigationPreventedHandlers.splice(this.navigationPreventedHandlers.indexOf(fn), 1);
+  allowNavigation(id) {
+    if (!id) throw new Error('Parameter "id" must be defined.');
+    const indexOfBladeToRemove = this.bladesPreventingNavigation.indexOf(id);
+    if (indexOfBladeToRemove > -1) {
+      this.bladesPreventingNavigation.splice(indexOfBladeToRemove, 1);
+    }
+  }
+
+  canNavigate() {
+    return this.bladesPreventingNavigation.length > 0;
   }
 
   getAll() {
@@ -138,7 +154,11 @@ export default class BladeManager extends EventEmitter {
     return this.bladesPreventingNavigation.length > 0;
   }
 
-  _notifyNavigationPrevented(id, originalFn) {
-    this.navigationPreventedHandlers.forEach(h => h(id, originalFn));
+  _notifyNavigationPrevented(navigateFn) {
+    const bladeIdToBeRemoved = this.bladesPreventingNavigation[0];
+    this.trigger('navigationPrevented', {
+      id: bladeIdToBeRemoved,
+      navigate: navigateFn,
+    });
   }
 }
