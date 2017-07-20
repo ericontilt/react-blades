@@ -16,6 +16,8 @@ export default class BladeManager extends EventEmitter {
       ...options,
     };
     this.blades = [];
+    this.bladesPreventingNavigation = [];
+    this.navigationPreventedHandlers = [];
   }
 
   add(blade) {
@@ -40,6 +42,12 @@ export default class BladeManager extends EventEmitter {
    */
   remove(id) {
     if (!this._findById(id)) return;
+    if (this._shouldPreventNavigation()) {
+      this._notifyNavigationPrevented(this.bladesPreventingNavigation[0],
+        () => this.remove(id),
+      );
+      return;
+    }
     this._removeFromCollection(id);
     if (this.blades.length > 0) {
       this._resetBladeVisibility();
@@ -48,12 +56,14 @@ export default class BladeManager extends EventEmitter {
     this.trigger('render');
   }
 
-  activate(id) {
-    this._activateById(id);
-    this.trigger('render');
-  }
-
   back(id) {
+    if (this._shouldPreventNavigation()) {
+      const bladeIdToBeRemoved = this.bladesPreventingNavigation[0];
+      this._notifyNavigationPrevented(bladeIdToBeRemoved,
+        () => this.back(id),
+      );
+      return;
+    }
     if (id) {
       const end = Math.min(this.blades.findIndex(b => b.id === id) + 1, this.blades.length);
       this.blades = this.blades.slice(0, end);
@@ -61,6 +71,20 @@ export default class BladeManager extends EventEmitter {
       this.blades = this.blades.slice(0, this.blades.length - 1);
     }
     this._resetBladeVisibility();
+    this._activateById(id);
+    this.trigger('render');
+  }
+
+  preventNavigation(id) {
+    if (this.bladesPreventingNavigation.indexOf(id) <= 0) {
+      this.bladesPreventingNavigation.splice(0, 0, id);
+    }
+    return () => this.bladesPreventingNavigation.splice(this.bladesPreventingNavigation.indexOf(id), 1);
+  }
+
+  subscribeNavigationPrevented(fn) {
+    this.navigationPreventedHandlers.push(fn);
+    return () => this.navigationPreventedHandlers.splice(this.navigationPreventedHandlers.indexOf(fn), 1);
   }
 
   getAll() {
@@ -108,5 +132,13 @@ export default class BladeManager extends EventEmitter {
     } else {
       this.blades.forEach(b => b.isVisible = true); //eslint-disable-line
     }
+  }
+
+  _shouldPreventNavigation() {
+    return this.bladesPreventingNavigation.length > 0;
+  }
+
+  _notifyNavigationPrevented(id, originalFn) {
+    this.navigationPreventedHandlers.forEach(h => h(id, originalFn));
   }
 }

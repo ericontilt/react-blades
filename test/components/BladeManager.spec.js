@@ -154,5 +154,64 @@ describe('BladeManager', () => {
       expect(visible[0].id).toBe('visible1');
       expect(visible[1].id).toBe('visible2');
     });
+
+    it('activates the last blade in the collection', () => {
+      manager.back('visible2');
+      expect(manager.getVisible()[1].isActive).toBeTruthy();
+    });
+
+    it('triggers a render', () => {
+      manager.back();
+      expect(manager.trigger).toHaveBeenCalledWith('render');
+    });
+  });
+
+  describe('#subscribeNavigationPrevented', () => {
+    it('registers and removes registration', () => {
+      const spy = jest.fn();
+      manager.add({ id: 'first' });
+      manager.add({ id: 'second' });
+      const unsubscribe = manager.subscribeNavigationPrevented(spy);
+      const allowNavigation = manager.preventNavigation('second');
+      manager.back('first');
+      expect(spy.mock.calls.length).toBe(1);
+      unsubscribe();
+      expect(spy.mock.calls.length).toBe(1);
+    });
+  });
+
+  describe('#preventNavigation', () => {
+    it('result function allows navigation for this blade', () => {
+      manager.add({ id: 'first' });
+      manager.add({ id: 'second' });
+      const allowNavigation = manager.preventNavigation('second');
+      allowNavigation();
+      manager.back('first');
+      expect(manager.getVisible().length).toBe(1);
+    });
+
+    it('works with back()', () => {
+      const spy = jest.fn();
+      manager.add({ id: 'first' });
+      manager.add({ id: 'second' });
+      manager.subscribeNavigationPrevented(spy);
+      const allowNavigation = manager.preventNavigation('second');
+      manager.back('first');
+      expect(spy.mock.calls.length).toBe(1);
+      expect(spy.mock.calls[0][0]).toBe('second');
+      expect(manager.getVisible().length).toBe(2);
+    });
+
+    it('works with remove()', () => {
+      const spy = jest.fn();
+      manager.add({ id: 'first' });
+      manager.add({ id: 'second' });
+      manager.subscribeNavigationPrevented(spy);
+      const allowNavigation = manager.preventNavigation('second');
+      manager.remove('second');
+      expect(spy.mock.calls.length).toBe(1);
+      expect(spy.mock.calls[0][0]).toBe('second');
+      expect(manager.getVisible().length).toBe(2);
+    });
   });
 });

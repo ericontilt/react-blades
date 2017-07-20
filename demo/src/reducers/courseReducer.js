@@ -34,6 +34,11 @@ export default function courseReducer(state = {}, action) {
         hasUnsavedChanges: true,
       });
 
+    case actionTypes.RESET_COURSE_CHANGES:
+      return Object.assign({}, state, {
+        hasUnsavedChanges: false,
+      });
+
     default:
       return state;
   }

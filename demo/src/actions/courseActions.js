@@ -27,6 +27,10 @@ export function editCourse(course) {
   return { type: actionTypes.EDIT_COURSE, course };
 }
 
+export function resetChanges() {
+  return { type: actionTypes.RESET_COURSE_CHANGES };
+}
+
 export function changeCourseTitle(title) {
   return { type: actionTypes.CHANGE_COURSE_TITLE, title };
 }

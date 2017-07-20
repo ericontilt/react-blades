@@ -19,12 +19,40 @@ class EditCourse extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleNavigationPrevented = this.handleNavigationPrevented.bind(this);
     this.handleCourseTitleChange = this.handleCourseTitleChange.bind(this);
     this.handleCourseLengthChange = this.handleCourseLengthChange.bind(this);
     this.handleCourseCategoryChange = this.handleCourseCategoryChange.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.handleAboutAuthorClick = this.handleAboutAuthorClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.unsubscribeNavigationPrevented = this.props.bladeManager.subscribeNavigationPrevented(this.handleNavigationPrevented);
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeNavigationPrevented();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { bladeManager, bladeId, course } = this.props;
+    const nextCourse = nextProps.course;
+    if (nextCourse.hasUnsavedChanges !== course.hasUnsavedChanges) {
+      if (nextCourse.hasUnsavedChanges) {
+        this.allowNavigation = bladeManager.preventNavigation(bladeId);
+      } else {
+        this.allowNavigation();
+      }
+    }
+  }
+
+  handleNavigationPrevented(id, originalFn) {
+    if(confirm('Sure?')) {
+      this.allowNavigation();
+      originalFn();
+    }
   }
 
   handleCourseTitleChange(e) {
