@@ -23,8 +23,6 @@ const styles = {
   title: {
     padding: '0 10px',
     margin: 0,
-    verticalAlign: 'middle',
-    // -ms-text-overflow: 'ellipsis',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
@@ -38,10 +36,12 @@ const BladeHeader = ({ title, height, children }, { bladeTheme }) => {
     backgroundColor: bladeHeader.backgroundColor,
     color: bladeHeader.textColor,
     height,
+    verticalAlign: 'middle',
     lineHeight: `${height}px`,
   };
   const titleStyle = {
     ...styles.title,
+    lineHeight: `${height}px`,
     backgroundColor: bladeHeader.titleBackgroundColor,
   };
   return (
