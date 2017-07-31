@@ -185,8 +185,8 @@ describe('BladeManager', () => {
     it('result function allows navigation for this blade', () => {
       manager.add({ id: 'first' });
       manager.add({ id: 'second' });
-      const allowNavigation = manager.preventNavigation('second');
-      allowNavigation();
+      manager.preventNavigation('second');
+      manager.allowNavigation('second');
       manager.back('first');
       expect(manager.getVisible().length).toBe(1);
     });
@@ -196,7 +196,7 @@ describe('BladeManager', () => {
       manager.add({ id: 'first' });
       manager.add({ id: 'second' });
       manager.on('navigationPrevented', spy);
-      const allowNavigation = manager.preventNavigation('second');
+      manager.preventNavigation('second');
       manager.back('first');
       expect(spy.mock.calls.length).toBe(1);
       expect(spy.mock.calls[0][0].id).toBe('second');
@@ -208,7 +208,7 @@ describe('BladeManager', () => {
       manager.add({ id: 'first' });
       manager.add({ id: 'second' });
       manager.on('navigationPrevented', spy);
-      const allowNavigation = manager.preventNavigation('second');
+      manager.preventNavigation('second');
       manager.remove('second');
       expect(spy.mock.calls.length).toBe(1);
       expect(spy.mock.calls[0][0].id).toBe('second');

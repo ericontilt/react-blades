@@ -88,7 +88,6 @@ export default class BladeManager extends EventEmitter {
     if (this.bladesPreventingNavigation.indexOf(id) <= 0) {
       this.bladesPreventingNavigation.splice(0, 0, id);
     }
-    return () => this.allowNavigation(id);
   }
 
   allowNavigation(id) {
