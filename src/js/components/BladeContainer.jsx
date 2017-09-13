@@ -30,8 +30,8 @@ const defaultZIndex = 1;
 const styles = {
   root: {
     height: '100%',
-    float: 'left',
     whiteSpace: 'normal',
+    display: 'inline-block',
   },
 };
 
