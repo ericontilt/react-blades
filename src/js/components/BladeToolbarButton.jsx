@@ -92,7 +92,7 @@ class BladeToolbarButton extends Component {
     };
     const iconStyle = {
       ...style.icon,
-      height: bladeTheme.bladeToolbarButton.iconFontSize,
+      minHeight: bladeTheme.bladeToolbarButton.iconFontSize,
       padding: bladeTheme.bladeToolbarButton.iconPadding,
       fontSize: bladeTheme.bladeToolbarButton.iconFontSize,
       color: bladeTheme.bladeToolbarButton[`${!isEnabled ? 'disabledColor' : 'iconColor'}`],
