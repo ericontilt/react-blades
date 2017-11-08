@@ -34,6 +34,7 @@ const bladeTheme = getBladeTheme({
   bladeToolbarButton: {
     backgroundColor: 'rgba(53, 79, 82, 1)',
     iconColor: 'white',
+    iconFontSize: '14px',
     textColor: 'white',
   },
 });

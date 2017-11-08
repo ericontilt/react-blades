@@ -34,9 +34,3 @@ body {
     color: red;
   }
 }
-
-.BladeToolbarButton__button [class*="fa-"] {
-  font-size: 16px;
-  padding-bottom: 1px;
-  margin-top: 2px;
-}

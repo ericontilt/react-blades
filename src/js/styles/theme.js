@@ -37,7 +37,10 @@ export default {
   },
   bladeToolbarButton: {
     textColor: palette.white,
+    textFontSize: '11px',
     iconColor: palette.white,
+    iconPadding: '4px 0 2px 0',
+    iconFontSize: '11px',
     disabledColor: palette.disabledTextColor,
     backgroundColor: palette.color2,
     hoveredBackgroundColor: lighten(palette.color2, 0.05),

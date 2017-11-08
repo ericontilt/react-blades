@@ -20,14 +20,20 @@ const style = {
     float: 'left',
   },
   button: {
-    display: 'block',
-    fontSize: '11px',
-    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     textDecoration: 'none',
     padding: 0,
     margin: 0,
-    lineHeight: '12px',
     border: 0,
+    outline: 0,
+  },
+  icon: {
+  },
+  title: {
+    flex: '0 1 auto',
+    overflow: 'hidden',
   },
 };
 
@@ -83,12 +89,18 @@ class BladeToolbarButton extends Component {
       backgroundColor: bladeTheme.bladeToolbarButton[`${this.state.hovered ? 'hoveredB' : 'b'}ackgroundColor`],
       width,
       height,
-      outline: 0,
     };
     const iconStyle = {
+      ...style.icon,
+      height: bladeTheme.bladeToolbarButton.iconFontSize,
+      padding: bladeTheme.bladeToolbarButton.iconPadding,
+      fontSize: bladeTheme.bladeToolbarButton.iconFontSize,
       color: bladeTheme.bladeToolbarButton[`${!isEnabled ? 'disabledColor' : 'iconColor'}`],
     };
     const titleStyle = {
+      ...style.title,
+      width,
+      fontSize: bladeTheme.bladeToolbarButton.textFontSize,
       color: bladeTheme.bladeToolbarButton[`${!isEnabled ? 'disabledColor' : 'textColor'}`],
     };
 
