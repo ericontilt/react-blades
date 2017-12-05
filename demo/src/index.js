@@ -21,7 +21,7 @@ store.dispatch(loadCourses());
 // $color4: rgba(53, 79, 82, 1);
 // $color5: rgba(47, 62, 70, 1);
 
-const bladeTheme = getBladeTheme({
+const themeOverrideProps = {
   bladeContainer: {
     backgroundColor: 'rgba(202, 210, 197, 1)',
   },
@@ -29,6 +29,7 @@ const bladeTheme = getBladeTheme({
     titleBackgroundColor: 'rgba(47, 62, 70, 1)',
   },
   bladeToolbar: {
+    height: 40,
     backgroundColor: 'rgba(53, 79, 82, 1)',
   },
   bladeToolbarButton: {
@@ -36,8 +37,16 @@ const bladeTheme = getBladeTheme({
     iconColor: 'white',
     iconFontSize: '14px',
     textColor: 'white',
+    layoutDirection: 'horizontal',
+    padding: '0 8px 0 0',
+    width: 125,
+    // layoutDirection: 'vertical',
+    // padding: 0,
+    // width: 65,
   },
-});
+};
+
+const bladeTheme = getBladeTheme(themeOverrideProps);
 
 const bladeManager = new BladeManager({
   orientation: 'horizontal',

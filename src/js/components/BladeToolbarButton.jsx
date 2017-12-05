@@ -10,10 +10,7 @@ const defaultProps = {
   onClick: () => { },
   iconClass: '',
   isEnabled: true,
-  width: 65,
-  height: 50,
   tooltip: null,
-  layoutDirection: 'vertical',
 };
 
 const style = {
@@ -22,7 +19,6 @@ const style = {
   button: {
     display: 'flex',
     textDecoration: 'none',
-    padding: 0,
     margin: 0,
     border: 0,
     outline: 0,
@@ -45,8 +41,14 @@ class BladeToolbarButton extends Component {
     this.state = {
       hovered: false,
     };
+    this.getLayoutDirection = this.getLayoutDirection.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+  }
+
+  getLayoutDirection() {
+    const { bladeTheme } = this.context;
+    return this.props.layoutDirection ? this.props.layoutDirection : bladeTheme.bladeToolbarButton.layoutDirection;
   }
 
   handleMouseEnter() {
@@ -81,15 +83,22 @@ class BladeToolbarButton extends Component {
       };
     }
 
+    const isLayoutDirectionVertical = this.getLayoutDirection() === 'vertical';
+
     const { bladeTheme } = this.context;
     const buttonStyle = {
       ...style.button,
       backgroundColor: bladeTheme.bladeToolbarButton[`${this.state.hovered ? 'hoveredB' : 'b'}ackgroundColor`],
-      width,
-      height,
-      flexDirection: this.props.layoutDirection === 'vertical' ? 'column' : 'row',
+      height: height || bladeTheme.bladeToolbar.height || 50,
+      flexDirection: isLayoutDirectionVertical ? 'column' : 'row',
       alignItems: 'center',
+      padding: bladeTheme.bladeToolbarButton.padding || 0,
     };
+    if (isLayoutDirectionVertical) {
+      buttonStyle.width = width || bladeTheme.bladeToolbarButton.width || 65;
+    } else {
+      buttonStyle.maxWidth = width || bladeTheme.bladeToolbarButton.width || 65;
+    }
     const iconStyle = {
       ...style.icon,
       minHeight: bladeTheme.bladeToolbarButton.iconFontSize,
@@ -99,10 +108,13 @@ class BladeToolbarButton extends Component {
     };
     const titleStyle = {
       ...style.title,
-      width,
       fontSize: bladeTheme.bladeToolbarButton.textFontSize,
       color: bladeTheme.bladeToolbarButton[`${!isEnabled ? 'disabledColor' : 'textColor'}`],
     };
+    if (!isLayoutDirectionVertical) {
+      titleStyle.whiteSpace = 'nowrap';
+      titleStyle.textOverflow = 'ellipsis';
+    }
 
     return (
       <li

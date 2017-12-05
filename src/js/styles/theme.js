@@ -36,14 +36,16 @@ export default {
     backgroundColor: palette.color2,
   },
   bladeToolbarButton: {
+    width: 125,
     textColor: palette.white,
     textFontSize: '11px',
     iconColor: palette.white,
-    iconPadding: '4px 0 2px 0',
-    iconFontSize: '11px',
+    iconPadding: '0 8px',
+    iconFontSize: '12px',
     disabledColor: palette.disabledTextColor,
     backgroundColor: palette.color2,
     hoveredBackgroundColor: lighten(palette.color2, 0.05),
+    layoutDirection: 'vertical',
   },
   bladeContent: {
   },

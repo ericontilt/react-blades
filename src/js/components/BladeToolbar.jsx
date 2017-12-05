@@ -6,7 +6,7 @@ const propTypes = {
   children: PropTypes.any,
 };
 const defaultProps = {
-  height: 50,
+  height: null,
   children: [],
 };
 const contextTypes = {
@@ -36,7 +36,7 @@ const BladeToolbar = ({ height, children }, { bladeTheme }) => {
   const rootStyle = {
     ...styles.root,
     backgroundColor: bladeTheme.bladeToolbar.backgroundColor,
-    height,
+    height: height || bladeTheme.bladeToolbar.height || 50,
   };
   return (
     <div className="BladeToolbar" style={rootStyle}>
