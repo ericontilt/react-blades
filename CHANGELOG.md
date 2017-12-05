@@ -1,3 +1,6 @@
+### 0.0.30
+* Added theming support for horizontal/vertical layout in BladeToolbarButton
+
 ### 0.0.29
 * Added layoutDirection property to BladeToolbarButton
 
