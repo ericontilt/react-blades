@@ -1,3 +1,6 @@
+### 0.0.29
+* Added layoutDirection property to BladeToolbarButton
+
 ### 0.0.28
 * Switched to flexbox layout in BladePresenter, BladeContainer, BladeHeader and BladeToolbar
 
