@@ -1,3 +1,6 @@
+### 0.0.31
+* Fixed container dimension and theming issues
+
 ### 0.0.30
 * Added theming support for horizontal/vertical layout in BladeToolbarButton
 

@@ -29,20 +29,20 @@ const themeOverrideProps = {
     titleBackgroundColor: 'rgba(47, 62, 70, 1)',
   },
   bladeToolbar: {
-    height: 40,
     backgroundColor: 'rgba(53, 79, 82, 1)',
+
+    // height: 40,
   },
   bladeToolbarButton: {
     backgroundColor: 'rgba(53, 79, 82, 1)',
     iconColor: 'white',
     iconFontSize: '14px',
     textColor: 'white',
-    layoutDirection: 'horizontal',
-    padding: '0 8px 0 0',
-    width: 125,
-    // layoutDirection: 'vertical',
-    // padding: 0,
-    // width: 65,
+
+    // layoutDirection: 'horizontal',
+    // padding: '0 8px 0 0',
+    // iconPadding: '0 8px',
+    // width: 125,
   },
 };
 

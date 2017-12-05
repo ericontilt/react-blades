@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  top: PropTypes.number,
   scroll: PropTypes.string,
   children: PropTypes.any,
 };
 const defaultProps = {
-  top: 90,
   scroll: 'y',
   children: [],
 };
@@ -17,20 +15,18 @@ const styles = {
     padding: 0,
     overflowY: 'auto',
     overflowX: 'hidden',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
+    flex: '1 0 auto',
     zIndex: 1,
+    position: 'relative',
   },
   container: {
-    position: 'relative',
+    position: 'absolute',
     width: '100%',
     height: '100%',
   },
 };
 
-const BladeContent = ({ top, scroll, children }) => {
+const BladeContent = ({ scroll, children }) => {
   const getScrollStyle = (s) => {
     const scrollStyle = {
       overflowX: 'hidden',

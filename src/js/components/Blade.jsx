@@ -17,8 +17,10 @@ const defaultProps = {
 const styles = {
   root: {
     position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1 0 auto',
     width: '100%',
-    height: '100%',
   },
 };
 
