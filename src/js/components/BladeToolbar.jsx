@@ -16,7 +16,9 @@ const contextTypes = {
 const styles = {
   root: {
     position: 'relative',
+    display: 'flex',
     flex: '0 0 auto',
+    flexDirection: 'row',
   },
   list: {
     listStyleType: 'none',
@@ -24,6 +26,9 @@ const styles = {
     padding: 0,
     overflow: 'none',
     wordWrap: 'break-word',
+    display: 'flex',
+    flex: '0 0 auto',
+    flexDirection: 'row',
   },
 };
 

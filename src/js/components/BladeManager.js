@@ -7,6 +7,7 @@ const defaultBladeProps = {
   isActive: true,
   width: 300,
   depth: 0,
+  orientation: 'horizontal',
 };
 
 export default class BladeManager extends EventEmitter {

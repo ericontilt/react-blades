@@ -13,16 +13,14 @@ const defaultProps = {
   width: 65,
   height: 50,
   tooltip: null,
+  layoutDirection: 'vertical',
 };
 
 const style = {
   root: {
-    float: 'left',
   },
   button: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     textDecoration: 'none',
     padding: 0,
     margin: 0,
@@ -89,6 +87,8 @@ class BladeToolbarButton extends Component {
       backgroundColor: bladeTheme.bladeToolbarButton[`${this.state.hovered ? 'hoveredB' : 'b'}ackgroundColor`],
       width,
       height,
+      flexDirection: this.props.layoutDirection === 'vertical' ? 'column' : 'row',
+      alignItems: 'center',
     };
     const iconStyle = {
       ...style.icon,

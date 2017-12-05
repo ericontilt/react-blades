@@ -28,6 +28,7 @@ const AboutAuthor = ({ bladeId, bladeManager }) => {
           title="Back"
           iconClass="fa fa-arrow-left"
           onClick={handleBackClick}
+          layoutDirection="horizontal"
         />
       </BladeToolbar>
 

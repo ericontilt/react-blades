@@ -8,4 +8,8 @@ export default {
   isEnabled: PropTypes.bool,
   width: PropTypes.number,
   tooltip: PropTypes.string,
+  layoutDirection: PropTypes.oneOf([
+    'vertical',
+    'horizontal',
+  ]),
 };
