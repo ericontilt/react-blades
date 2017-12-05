@@ -19,6 +19,7 @@ const contextTypes = {
 const styles = {
   root: {
     position: 'relative',
+    flex: '0 0 auto',
   },
   title: {
     padding: '0 10px',
@@ -36,8 +37,7 @@ const BladeHeader = ({ title, height, children }, { bladeTheme }) => {
     backgroundColor: bladeHeader.backgroundColor,
     color: bladeHeader.textColor,
     height,
-    verticalAlign: 'middle',
-    lineHeight: `${height}px`,
+    justifyContent: 'center',
   };
   const titleStyle = {
     ...styles.title,

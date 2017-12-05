@@ -9,11 +9,13 @@ const contextTypes = {
 
 const styles = {
   root: {
-    boxSizing: 'border-box',
     height: '100%',
     width: '100%',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
+    overflowX: 'auto',
+    overflowY: 'hidden',
+    display: 'flex',
+    flex: '1 1 auto',
+    flexDirection: 'row',
   },
 };
 

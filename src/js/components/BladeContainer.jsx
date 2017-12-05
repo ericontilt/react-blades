@@ -31,7 +31,9 @@ const styles = {
   root: {
     height: '100%',
     whiteSpace: 'normal',
-    display: 'inline-block',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '0 0 auto',
   },
 };
 

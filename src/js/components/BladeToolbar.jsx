@@ -14,7 +14,10 @@ const contextTypes = {
 };
 
 const styles = {
-  root: {},
+  root: {
+    position: 'relative',
+    flex: '0 0 auto',
+  },
   list: {
     listStyleType: 'none',
     margin: 0,
@@ -26,9 +29,9 @@ const styles = {
 
 const BladeToolbar = ({ height, children }, { bladeTheme }) => {
   const rootStyle = {
+    ...styles.root,
     backgroundColor: bladeTheme.bladeToolbar.backgroundColor,
     height,
-    lineHeight: `${height}px`,
   };
   return (
     <div className="BladeToolbar" style={rootStyle}>

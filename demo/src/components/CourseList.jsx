@@ -68,7 +68,7 @@ class CourseList extends React.Component {
         <BladeToolbar>
           <BladeToolbarButton
             id="new-course"
-            title="Mark Assets"
+            title="New Course"
             iconClass="fa fa-plus"
             onClick={this.handleCreateClick}
           />
