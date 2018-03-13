@@ -19,10 +19,12 @@ const propTypes = {
   isActive: PropTypes.bool,
   isVisible: PropTypes.bool,
   bladeTheme: PropTypes.object.isRequired,
+  scroll: PropTypes.func,
 };
 const defaultProps = {
   isActive: false,
   isVisible: true,
+  scroll: () => {},
 };
 
 const defaultZIndex = 1;
@@ -43,7 +45,7 @@ export default class BladeContainer extends React.Component {
       () => this.props.bladeManager.activate(this.props.id),
     );
     // this.props.bladeManager.activate(this.props.id);
-    // window.scrollTo(this.props.left, 0);
+    this.props.scroll(this.blade.offsetLeft);
   }
 
   componentWillUnmount() {

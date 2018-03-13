@@ -25,6 +25,8 @@ const BladePresenter = (_, { bladeManager, bladeTheme }) => {
     fontFamily: bladeTheme.bladePresenter.fontFamily,
   };
 
+  const scrollTo = x => document.getElementsByClassName('BladePresenter')[0].scrollTo(x, 0);
+
   return (
     <div className="BladePresenter" style={bladePresenterStyle}>
       {bladeManager.getAll().map((blade, i) => (
@@ -33,6 +35,7 @@ const BladePresenter = (_, { bladeManager, bladeTheme }) => {
           index={i}
           key={blade.id}
           bladeTheme={bladeTheme}
+          scroll={scrollTo}
           {...blade}
         />
       ))}
