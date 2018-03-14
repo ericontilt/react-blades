@@ -45,7 +45,7 @@ export default class BladeContainer extends React.Component {
       () => this.props.bladeManager.activate(this.props.id),
     );
     // this.props.bladeManager.activate(this.props.id);
-    this.props.scroll(this.blade.offsetLeft);
+    this.props.scroll(this.blade);
   }
 
   componentWillUnmount() {

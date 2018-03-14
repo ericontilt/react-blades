@@ -25,7 +25,7 @@ const BladePresenter = (_, { bladeManager, bladeTheme }) => {
     fontFamily: bladeTheme.bladePresenter.fontFamily,
   };
 
-  const scrollTo = x => document.getElementsByClassName('BladePresenter')[0].scrollTo(x, 0);
+  const scrollTo = blade => blade.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   return (
     <div className="BladePresenter" style={bladePresenterStyle}>
