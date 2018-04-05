@@ -13,6 +13,9 @@ const styles = {
     width: '100%',
     overflowX: 'auto',
     overflowY: 'hidden',
+  },
+  flexWrapper: {
+    height: '100%',
     display: 'flex',
     flex: '1 1 auto',
     flexDirection: 'row',
@@ -29,16 +32,18 @@ const BladePresenter = (_, { bladeManager, bladeTheme }) => {
 
   return (
     <div className="BladePresenter" style={bladePresenterStyle}>
-      {bladeManager.getAll().map((blade, i) => (
-        <BladeContainer
-          bladeManager={bladeManager}
-          index={i}
-          key={blade.id}
-          bladeTheme={bladeTheme}
-          scroll={scrollTo}
-          {...blade}
-        />
-      ))}
+      <div style={styles.flexWrapper}>
+        {bladeManager.getAll().map((blade, i) => (
+          <BladeContainer
+            bladeManager={bladeManager}
+            index={i}
+            key={blade.id}
+            bladeTheme={bladeTheme}
+            scroll={scrollTo}
+            {...blade}
+          />
+        ))}
+      </div>
     </div>
   );
 };
